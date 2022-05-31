@@ -13,20 +13,30 @@ export const rootSlice = createSlice({
   reducers: {
     userSuccessLogin: (state, action) => {
       const { user, token } = action.payload;
-      state.user = user;
-      state.token = token;
-      state.isLogin = true;
-      localStorage.setItem("usrttkn", token);
-      localStorage.setItem("usrid", user.id);
+      if (user && token) {
+        state.user = user;
+        state.token = token;
+        state.isLogin = true;
+        localStorage.setItem("usrttkn", token);
+        localStorage.setItem("usrid", user.id);
+      }
     },
     setAppLoading: (state, action) => {
       const { condition } = action.payload;
 
       state.isLoading = condition;
     },
+    userLogout: (state) => {
+      state.user = null;
+      state.token = null;
+      state.isLogin = false;
+      localStorage.removeItem("usrttkn");
+      localStorage.removeItem("usrid");
+    },
   },
 });
 
-export const { userSuccessLogin, setAppLoading } = rootSlice.actions;
+export const { userSuccessLogin, setAppLoading, userLogout } =
+  rootSlice.actions;
 
 export default rootSlice.reducer;

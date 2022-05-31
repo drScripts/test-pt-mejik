@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   CustomDialog,
@@ -16,6 +16,7 @@ import { CHECKBOOKBORROWED, DETAILBOOKQUERY } from "../graphql/queries";
 import { setAppLoading } from "../reducers/root";
 
 export default function DetailBookPage() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const rootState = useSelector((state) => state.root);
   const [modal, setModal] = useState({ show: false, title: "" });
@@ -66,10 +67,14 @@ export default function DetailBookPage() {
   }, [dataOrder]);
 
   const modalHandler = (title) => {
-    setModal({
-      show: true,
-      title,
-    });
+    if (!rootState.isLogin) {
+      navigate("/login");
+    } else {
+      setModal({
+        show: true,
+        title,
+      });
+    }
   };
 
   const onInputChange = (e) => {

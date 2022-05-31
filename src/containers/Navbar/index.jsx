@@ -1,10 +1,13 @@
+import { Menu } from "@headlessui/react";
 import { BookmarkIcon } from "@heroicons/react/outline";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RenderIf } from "../../components";
+import { userLogout } from "../../reducers/root";
 
 export default function Navbar() {
   const rootState = useSelector((state) => state.root);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -42,14 +45,42 @@ export default function Navbar() {
                     <BookmarkIcon width={30} height={30} />
                   </a>
                 </div>
-                <div>
-                  <a href="http://localhost">
-                    <img
-                      src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                      className={"rounded-full w-9 h-9"}
-                      alt="profile"
-                    />
-                  </a>
+                <div className="relative">
+                  <Menu>
+                    <Menu.Button>
+                      <img
+                        src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        className={"rounded-full w-9 h-9"}
+                        alt="profile"
+                      />
+                    </Menu.Button>
+                    <Menu.Items
+                      className={
+                        "flex flex-col absolute bg-white right-2 py-4 px-2 rounded-xl w-48"
+                      }
+                    >
+                      <Menu.Item>
+                        {({ active }) => (
+                          <p
+                            className={`${active && "text-blue-500"}`}
+                            onClick={() => dispatch(userLogout())}
+                          >
+                            Logout
+                          </p>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            className={`${active && "text-blue-500"}`}
+                            href="/account-settings"
+                          >
+                            Documentation
+                          </a>
+                        )}
+                      </Menu.Item>
+                    </Menu.Items>
+                  </Menu>
                 </div>
               </RenderIf>
             </div>

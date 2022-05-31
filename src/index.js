@@ -23,12 +23,16 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("usrttkn");
-  return {
-    headers: {
-      ...headers,
-      Authorization: token ? `Bearer ${token}` : "",
-    },
-  };
+  if (token) {
+    return {
+      headers: {
+        ...headers,
+        authorization: `Bearer ${token}`,
+      },
+    };
+  } else {
+    return headers;
+  }
 });
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
