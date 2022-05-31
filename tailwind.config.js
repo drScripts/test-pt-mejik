@@ -4,7 +4,9 @@ module.exports = {
     extend: {
       colors: {
         brownLight: "#d8aa61",
+        brownLightPastel: "#f5c06c",
         transparent: "transparent",
+        lightGrey: "#f5f0f0",
         current: "currentColor",
         white: "#ffffff",
         purple: "#3f3cbb",

@@ -56,12 +56,6 @@ export default function ListBooks() {
   });
 
   useEffect(() => {
-    return () => {
-      setSearchParams({});
-    };
-  }, [setSearchParams]);
-
-  useEffect(() => {
     refetch();
   }, [searchParams, refetch]);
 

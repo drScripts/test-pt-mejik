@@ -1,5 +1,6 @@
 import { BookmarkIcon } from "@heroicons/react/outline";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { RenderIf } from "../../components";
 
 export default function Navbar() {
@@ -26,14 +27,12 @@ export default function Navbar() {
             <div className="flex items-center space-x-5">
               <RenderIf condition={!rootState.isLogin}>
                 <div className="px-7 py-2 border border-brownLight bg-brownLight rounded-xl">
-                  <a className="text-xl font-medium" href="http://localhost">
-                    Login
-                  </a>
+                  <Link to={"/login"}>Login</Link>
                 </div>
                 <div className="border px-7 py-2 rounded-xl">
-                  <a className="text-xl font-medium" href="http://localhost">
+                  <Link className="text-xl font-medium" to={"/"}>
                     Register
-                  </a>
+                  </Link>
                 </div>
               </RenderIf>
 

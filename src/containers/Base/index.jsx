@@ -1,12 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useRef } from "react";
+import { useSelector } from "react-redux";
 
 export default function Base({ children, isLoading = false }) {
   const buttonRef = useRef(null);
+  const rootState = useSelector((state) => state.root);
 
   return (
     <>
-      <Transition.Root show={isLoading} as={Fragment}>
+      <Transition.Root show={isLoading || rootState.isLoading} as={Fragment}>
         <Dialog
           as="div"
           className="relative z-10"
