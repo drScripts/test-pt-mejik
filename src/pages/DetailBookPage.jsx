@@ -48,30 +48,22 @@ export default function DetailBookPage() {
       toast.error(error.message);
     }
 
-    if (dataOrder) {
-      setForm({
-        dateStart: "",
-        dueDate: "",
-      });
-      setModal({ ...modal, show: false });
-    }
-
     dispatch(
       setAppLoading({
         condition: loading || loadingCheckBorrowed || loadingCreateOrder,
       })
     );
-  }, [
-    loading,
-    dispatch,
-    loadingCheckBorrowed,
-    loadingCreateOrder,
-    error,
-    dataOrder,
-    setModal,
-    setForm,
-    modal,
-  ]);
+  }, [loading, dispatch, loadingCheckBorrowed, loadingCreateOrder, error]);
+
+  useEffect(() => {
+    if (dataOrder) {
+      setForm({
+        dateStart: "",
+        dueDate: "",
+      });
+      setModal({ title: "", show: false });
+    }
+  }, [dataOrder]);
 
   const modalHandler = (title) => {
     setModal({
@@ -95,7 +87,9 @@ export default function DetailBookPage() {
       return;
     }
 
-    if (moment(form.dateStart).isBefore(new Date())) {
+    if (
+      moment(form.dateStart).isBefore(moment(new Date()).format("YYYY-MM-DD"))
+    ) {
       toast.error("Start date must be on future or now");
       return;
     }
