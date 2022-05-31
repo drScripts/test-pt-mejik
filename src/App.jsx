@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { HomePage, LoginPage, RegisterPage } from "./pages";
+import { DetailBookPage, HomePage, LoginPage, RegisterPage } from "./pages";
 import { userSuccessLogin } from "./reducers/root";
 
 export default function App() {
@@ -48,6 +48,7 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/book/:id" element={<DetailBookPage />} />
       </Routes>
     </BrowserRouter>
   );

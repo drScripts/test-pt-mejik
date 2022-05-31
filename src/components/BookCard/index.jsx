@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Rating from "../Rating";
 
 export default function BookCard({ className, name, authorName, id }) {
@@ -19,9 +20,12 @@ export default function BookCard({ className, name, authorName, id }) {
           </h3>
           <p className="text-softLightBrown text-xl mb-4">{authorName}</p>
         </div>
-        <button className="border-2 font-medium border-brownLight text-brownLight text-xl py-2 rounded-full hover:bg-brownLight hover:text-white">
+        <Link
+          to={`/book/${id}`}
+          className="border-2 font-medium border-brownLight text-brownLight text-xl py-2 rounded-full hover:bg-brownLight hover:text-white text-center"
+        >
           Detail
-        </button>
+        </Link>
       </div>
     </div>
   );
