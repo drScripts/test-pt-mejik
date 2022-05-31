@@ -5,6 +5,9 @@ import App from "./App";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./reducers/root";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -13,10 +16,18 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const store = configureStore({
+  reducer: {
+    root: rootReducer,
+  },
+});
+
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
       <ToastContainer />
     </ApolloProvider>
   </React.StrictMode>
