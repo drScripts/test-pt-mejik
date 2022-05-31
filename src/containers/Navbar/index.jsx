@@ -30,7 +30,7 @@ export default function Navbar() {
                   <Link to={"/login"}>Login</Link>
                 </div>
                 <div className="border px-7 py-2 rounded-xl">
-                  <Link className="text-xl font-medium" to={"/"}>
+                  <Link className="text-xl font-medium" to={"/register"}>
                     Register
                   </Link>
                 </div>

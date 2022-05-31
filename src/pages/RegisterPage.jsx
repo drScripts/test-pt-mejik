@@ -1,9 +1,15 @@
-import { ArrowLeftIcon, KeyIcon, MailIcon } from "@heroicons/react/solid";
+import {
+  ArrowLeftIcon,
+  KeyIcon,
+  MailIcon,
+  PhoneIcon,
+  UserIcon,
+} from "@heroicons/react/solid";
 import React from "react";
 import { Link } from "react-router-dom";
 import { GeneralInput } from "../components";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <div className="px-12 py-12 h-screen">
       <div className="w-full h-full bg-brownLightPastel flex rounded-xl shadow-xl">
@@ -15,11 +21,11 @@ export default function LoginPage() {
             height={500}
           ></iframe>
           <h1 className="text-3xl text-center font-bold text-white">
-            Let's Login to your account and <br /> read all books for free!
+            Let's Register to your account and <br /> read all books for free!
           </h1>
         </div>
         <div className="flex-1 bg-white flex flex-col justify-center  rounded-r-xl relative">
-          <Link to={"/"}>
+          <Link to={"/login"}>
             <ArrowLeftIcon
               width={45}
               height={35}
@@ -28,14 +34,46 @@ export default function LoginPage() {
           </Link>
           <div className="px-28">
             <h1 className="text-4xl font-libre font-medium">
-              Login To Your Account !
+              Let's Get Started !
             </h1>
             <p className="text-xl mt-3 capitalize text-gray-400">
-              Don't have an account?{" "}
-              <Link to={"/register"} className={"text-blue-500 underline"}>
-                register
+              Already have an account?{" "}
+              <Link to={"/login"} className={"text-blue-500 underline"}>
+                Login!
               </Link>
             </p>
+            <div className="flex justify-between space-x-7">
+              <GeneralInput
+                id={"firstName"}
+                name={"firstName"}
+                label={"Your Firstname"}
+                placeholder={"Example"}
+                type={"text"}
+                value={""}
+                icon={<UserIcon width={30} height={30} />}
+                className={"mt-5 w-full"}
+              />
+              <GeneralInput
+                id={"lastName"}
+                name={"lastName"}
+                label={"Your Lastname"}
+                placeholder={"Example Lastname"}
+                type={"text"}
+                value={""}
+                icon={<UserIcon width={30} height={30} />}
+                className={"mt-5 w-full"}
+              />
+            </div>
+            <GeneralInput
+              id={"phoneNumber"}
+              name={"phoneNumber"}
+              label={"Phone Number"}
+              placeholder={"Your Phone Number"}
+              type={"text"}
+              value={""}
+              icon={<PhoneIcon width={30} height={30} />}
+              className={"mt-5"}
+            />
             <GeneralInput
               id={"email"}
               name={"email"}
@@ -57,7 +95,7 @@ export default function LoginPage() {
               className={"mt-5"}
             />
             <button className="w-full py-3 bg-brownLightPastel hover:bg-brownLight rounded-xl text-2xl font-bold text-white mt-10">
-              Login
+              Register
             </button>
           </div>
         </div>
