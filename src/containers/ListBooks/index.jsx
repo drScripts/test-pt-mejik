@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { BookCard, ToggledSearchInput } from "../../components";
 import { gql, useQuery } from "@apollo/client";
+import { useSearchParams } from "react-router-dom";
 
 const LISTQUERY = gql`
   query listBook($or: [BookFilter], $where: BookFilter) {
@@ -31,24 +32,38 @@ const LISTQUERY = gql`
 `;
 
 export default function ListBooks() {
-  const [query, setQuery] = useState("");
+  let [searchParams, setSearchParams] = useSearchParams();
 
-  const { data } = useQuery(LISTQUERY, {
-    variables: query
+  const searchInputHanlder = (e) => {
+    setSearchParams({ q: e.target.value });
+  };
+
+  const { data, refetch } = useQuery(LISTQUERY, {
+    variables: searchParams.get("q")
       ? {
           or: [
             {
-              name_contains: "legend",
+              name_contains: searchParams.get("q"),
             },
             {
               category: {
-                name_contains: "fantasy",
+                name_contains: searchParams.get("q"),
               },
             },
           ],
         }
       : {},
   });
+
+  useEffect(() => {
+    return () => {
+      setSearchParams({});
+    };
+  }, [setSearchParams]);
+
+  useEffect(() => {
+    refetch();
+  }, [searchParams, refetch]);
 
   return (
     <section className="py-12">
@@ -57,7 +72,7 @@ export default function ListBooks() {
           <h2 className="text-3xl font-libre font-medium">
             All Available Books
           </h2>
-          <ToggledSearchInput />
+          <ToggledSearchInput onChange={searchInputHanlder} />
         </div>
         <div className="grid grid-cols-3 space-y-5 py-12">
           {data?.books?.map((book) => (

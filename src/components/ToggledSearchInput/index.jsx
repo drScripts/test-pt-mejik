@@ -2,7 +2,7 @@ import { SearchIcon } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
 import React, { useRef } from "react";
 
-export default function ToggledSearchInput() {
+export default function ToggledSearchInput({ onChange }) {
   const widthRef = useRef(null);
   const inputRef = useRef(null);
   const closeRef = useRef(null);
@@ -34,6 +34,7 @@ export default function ToggledSearchInput() {
         ref={inputRef}
         style={{ display: "none" }}
         className={"w-full outline-none"}
+        onChange={onChange}
       />
       <XIcon
         width={25}
