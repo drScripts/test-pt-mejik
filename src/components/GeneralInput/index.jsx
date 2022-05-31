@@ -10,6 +10,7 @@ export default function GeneralInput({
   type = "text",
   icon,
   className,
+  required = false,
 }) {
   return (
     <div className={`flex flex-col ${className}`}>
@@ -26,6 +27,7 @@ export default function GeneralInput({
           onChange={onChange}
           id={id}
           className={"w-full outline-none text-lg"}
+          required={required}
         />
       </div>
     </div>
