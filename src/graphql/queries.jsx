@@ -38,3 +38,43 @@ export const CHECKBOOKBORROWED = gql`
     }
   }
 `;
+
+export const GETUSER = gql`
+  query getUserCheckHeader($id: String) {
+    user(id: $id) {
+      id
+      role
+      firstName
+      lastName
+      email
+    }
+  }
+`;
+
+export const LISTQUERY = gql`
+  query listBook($or: [BookFilter], $where: BookFilter) {
+    books(or: $or, where: $where) {
+      name
+      cover
+      description
+      code
+      status
+      rack {
+        name
+        code
+        id
+      }
+      author {
+        name
+        photo
+        id
+      }
+      category {
+        name
+        code
+        id
+      }
+      id
+    }
+  }
+`;

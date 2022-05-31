@@ -1,35 +1,8 @@
 import React, { useEffect } from "react";
 import { BookCard, ToggledSearchInput } from "../../components";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useSearchParams } from "react-router-dom";
-
-const LISTQUERY = gql`
-  query listBook($or: [BookFilter], $where: BookFilter) {
-    books(or: $or, where: $where) {
-      name
-      cover
-      description
-      code
-      status
-      rack {
-        name
-        code
-        id
-      }
-      author {
-        name
-        photo
-        id
-      }
-      category {
-        name
-        code
-        id
-      }
-      id
-    }
-  }
-`;
+import { LISTQUERY } from "../../graphql/queries";
 
 export default function ListBooks() {
   let [searchParams, setSearchParams] = useSearchParams();

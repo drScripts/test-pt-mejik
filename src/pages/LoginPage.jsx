@@ -1,4 +1,4 @@
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { ArrowLeftIcon, KeyIcon, MailIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -6,25 +6,11 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { GeneralInput } from "../components";
 import Base from "../containers/Base";
+import { LOGINQUERY } from "../graphql/mutations";
 import { setAppLoading, userSuccessLogin } from "../reducers/root";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
-
-  const LOGINQUERY = gql`
-    mutation login($input: LoginInput) {
-      login(input: $input) {
-        user {
-          id
-          role
-          firstName
-          lastName
-          email
-        }
-        token
-      }
-    }
-  `;
 
   const [login, { loading, data, error }] = useMutation(LOGINQUERY);
 

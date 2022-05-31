@@ -1,25 +1,14 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { GETUSER } from "./graphql/queries";
 import { DetailBookPage, HomePage, LoginPage, RegisterPage } from "./pages";
 import { userSuccessLogin } from "./reducers/root";
 
 export default function App() {
   const dispatch = useDispatch();
   const userId = localStorage.getItem("usrid");
-
-  const GETUSER = gql`
-    query getUserCheckHeader($id: String) {
-      user(id: $id) {
-        id
-        role
-        firstName
-        lastName
-        email
-      }
-    }
-  `;
 
   const { data, refetch } = useQuery(GETUSER);
 

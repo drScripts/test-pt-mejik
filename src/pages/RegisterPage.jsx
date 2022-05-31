@@ -1,4 +1,4 @@
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import {
   ArrowLeftIcon,
   KeyIcon,
@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { GeneralInput } from "../components";
 import Base from "../containers/Base";
+import { REGISTERQUERY } from "../graphql/mutations";
 import { setAppLoading, userSuccessLogin } from "../reducers/root";
 
 export default function RegisterPage() {
@@ -23,21 +24,6 @@ export default function RegisterPage() {
     password: "",
   });
   const dispatch = useDispatch();
-
-  const REGISTERQUERY = gql`
-    mutation register($input: RegisterInput) {
-      register(input: $input) {
-        token
-        user {
-          id
-          role
-          firstName
-          lastName
-          email
-        }
-      }
-    }
-  `;
 
   const [register, { data, loading, error }] = useMutation(REGISTERQUERY);
 

@@ -8,3 +8,33 @@ export const CREATEORDER = gql`
     }
   }
 `;
+
+export const LOGINQUERY = gql`
+  mutation login($input: LoginInput) {
+    login(input: $input) {
+      user {
+        id
+        role
+        firstName
+        lastName
+        email
+      }
+      token
+    }
+  }
+`;
+
+export const REGISTERQUERY = gql`
+  mutation register($input: RegisterInput) {
+    register(input: $input) {
+      token
+      user {
+        id
+        role
+        firstName
+        lastName
+        email
+      }
+    }
+  }
+`;
