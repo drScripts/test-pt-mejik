@@ -169,8 +169,8 @@ export const GETCATEGORIES = gql`
 `;
 
 export const GETRACKS = gql`
-  query getRacks {
-    racks {
+  query getRacks($or: [RackFilter], $where: RackFilter, $orderBy: RackOrderBy) {
+    racks(or: $or, where: $where, orderBy: $orderBy) {
       name
       code
       id

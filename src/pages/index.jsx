@@ -7,6 +7,7 @@ import EditOrderPage from "./admin/EditOrderPage";
 import BooksPage from "./admin/BooksPage";
 import DetailBookPageAdmin from "./admin/DetailBookPage";
 import AddBookPage from "./admin/AddBookPage";
+import RacksPage from "./admin/RacksPage";
 
 export {
   HomePage,
@@ -18,4 +19,5 @@ export {
   BooksPage,
   DetailBookPageAdmin,
   AddBookPage,
+  RacksPage,
 };

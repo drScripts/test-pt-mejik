@@ -12,6 +12,7 @@ import {
   EditOrderPage,
   HomePage,
   LoginPage,
+  RacksPage,
   RegisterPage,
 } from "./pages";
 import { userSuccessLogin } from "./reducers/root";
@@ -54,6 +55,7 @@ export default function App() {
           <Route path="/admin/books" element={<BooksPage />} />
           <Route path="/admin/books/add" element={<AddBookPage />} />
           <Route path="/admin/books/:id" element={<DetailBookPageAdmin />} />
+          <Route path="/admin/racks" element={<RacksPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
