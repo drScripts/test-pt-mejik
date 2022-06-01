@@ -67,3 +67,11 @@ export const DELETEBOOKMUTATE = gql`
     }
   }
 `;
+
+export const UPDATERACK = gql`
+  mutation updateRack($input: UpdateRackInput!, $id: String!) {
+    updateRack(input: $input, id: $id) {
+      id
+    }
+  }
+`;

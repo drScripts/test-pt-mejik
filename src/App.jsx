@@ -10,6 +10,7 @@ import {
   DetailBookPage,
   DetailBookPageAdmin,
   EditOrderPage,
+  EditRackPage,
   HomePage,
   LoginPage,
   RacksPage,
@@ -56,6 +57,7 @@ export default function App() {
           <Route path="/admin/books/add" element={<AddBookPage />} />
           <Route path="/admin/books/:id" element={<DetailBookPageAdmin />} />
           <Route path="/admin/racks" element={<RacksPage />} />
+          <Route path="/admin/racks/:id" element={<EditRackPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

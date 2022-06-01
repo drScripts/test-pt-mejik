@@ -177,3 +177,13 @@ export const GETRACKS = gql`
     }
   }
 `;
+
+export const GETRACK = gql`
+  query getRack($id: String!) {
+    rack(id: $id) {
+      name
+      code
+      id
+    }
+  }
+`;
