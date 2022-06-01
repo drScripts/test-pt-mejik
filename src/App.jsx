@@ -3,7 +3,13 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GETUSER } from "./graphql/queries";
-import { DetailBookPage, HomePage, LoginPage, RegisterPage } from "./pages";
+import {
+  AdminOrdersPage,
+  DetailBookPage,
+  HomePage,
+  LoginPage,
+  RegisterPage,
+} from "./pages";
 import { userSuccessLogin } from "./reducers/root";
 
 export default function App() {
@@ -38,6 +44,9 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/book/:id" element={<DetailBookPage />} />
+        <Route path="/admin">
+          <Route index element={<AdminOrdersPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

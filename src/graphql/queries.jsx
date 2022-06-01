@@ -78,3 +78,35 @@ export const LISTQUERY = gql`
     }
   }
 `;
+
+export const GETORDERSQUERY = gql`
+  query getOrders(
+    $where: OrderFilter
+    $or: [OrderFilter]
+    $limit: Int
+    $skip: Int
+    $orderBy: OrderOrderBy
+  ) {
+    orders(
+      where: $where
+      or: $or
+      limit: $limit
+      skip: $skip
+      orderBy: $orderBy
+    ) {
+      status
+      user {
+        firstName
+        lastName
+        id
+      }
+      book {
+        id
+        name
+      }
+      id
+      dateStart
+      dueDate
+    }
+  }
+`;

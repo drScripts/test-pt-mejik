@@ -1,13 +1,34 @@
 import { Menu } from "@headlessui/react";
 import { BookmarkIcon } from "@heroicons/react/outline";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { RenderIf } from "../../components";
 import { userLogout } from "../../reducers/root";
+
+const navigationAdminList = [
+  {
+    path: "/admin",
+    title: "Orders",
+  },
+  {
+    path: "/",
+    title: "Books",
+  },
+  {
+    path: "/",
+    title: "Racks",
+  },
+  {
+    path: "/",
+    title: "Categories",
+  },
+];
 
 export default function Navbar() {
   const rootState = useSelector((state) => state.root);
   const dispatch = useDispatch();
+
+  const params = useLocation().pathname;
 
   return (
     <>
@@ -16,16 +37,35 @@ export default function Navbar() {
           <div className="flex justify-between items-center">
             <div className="text-2xl font-bold">StoryBooks</div>
             <div className="flex items-center space-x-3">
-              <div className="px-11 bg-brownLight rounded-full py-3">
-                <a href="http://localhost" className="text-xl font-medium">
-                  Books
-                </a>
-              </div>
-              <div className="px-11 rounded-full py-3">
-                <a href="http://localhost" className="text-xl font-medium">
-                  About
-                </a>
-              </div>
+              <RenderIf condition={rootState?.user?.role === "AUTHENTICATED"}>
+                <div className="px-9 bg-brownLight rounded-full py-3">
+                  <a href="http://localhost" className="text-xl font-medium">
+                    Books
+                  </a>
+                </div>
+                <div className="px-9 rounded-full py-3">
+                  <a href="http://localhost" className="text-xl font-medium">
+                    About
+                  </a>
+                </div>
+              </RenderIf>
+              <RenderIf condition={rootState?.user?.role === "STAFF"}>
+                {navigationAdminList.map((navAdmin, i) => (
+                  <Link
+                    to={navAdmin.path}
+                    className="text-xl font-medium"
+                    key={i}
+                  >
+                    <div
+                      className={`px-9 ${
+                        params === navAdmin.path ? "bg-brownLight" : ""
+                      } rounded-full py-3`}
+                    >
+                      {navAdmin.title}
+                    </div>
+                  </Link>
+                ))}
+              </RenderIf>
             </div>
             <div className="flex items-center space-x-5">
               <RenderIf condition={!rootState.isLogin}>

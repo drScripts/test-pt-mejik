@@ -6,6 +6,7 @@ import RenderIf from "./RenderIf";
 import GeneralInput from "./GeneralInput";
 import DetailItem from "./DetailItem";
 import CustomDialog from "./CustomDialog";
+import CustomTable from "./CustomTable";
 
 export {
   SearchInput,
@@ -16,4 +17,5 @@ export {
   GeneralInput,
   DetailItem,
   CustomDialog,
+  CustomTable,
 };
