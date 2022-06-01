@@ -109,3 +109,31 @@ export const ADDCATEGORY = gql`
     }
   }
 `;
+
+export const DELETECATEGORY = gql`
+  mutation deleteCategory($id: String!) {
+    deleteCategory(id: $id) {
+      id
+      name
+      code
+    }
+  }
+`;
+
+export const CREATEBORROW = gql`
+  mutation borrowBook($input: CreateBorrowInput!) {
+    createBorrow(input: $input) {
+      status
+      id
+    }
+  }
+`;
+
+export const UPDATEORDER = gql`
+  mutation updateOrder($id: String!, $input: UpdateOrderInput!) {
+    updateOrder(input: $input, id: $id) {
+      id
+      status
+    }
+  }
+`;

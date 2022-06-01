@@ -117,6 +117,7 @@ export const GETORDER = gql`
       dateStart
       dueDate
       book {
+        id
         description
         name
         code

@@ -75,7 +75,7 @@ export default function EditCategoryPage() {
             name={"name"}
             id={"name"}
             value={form.name}
-            placeholder={"Insert the title of rack"}
+            placeholder={"Insert the title of category"}
             label={"Category Name"}
             required
             onChange={onFormChange}
@@ -86,7 +86,7 @@ export default function EditCategoryPage() {
             name={"code"}
             id={"code"}
             onChange={onFormChange}
-            placeholder={"Insert Rack Code"}
+            placeholder={"Insert Category Code"}
             type={"text"}
             className={"my-4"}
             required

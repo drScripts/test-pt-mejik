@@ -25,6 +25,7 @@ export default function AdminOrdersPage() {
   const { data, loading } = useQuery(GETORDERSQUERY, {
     variables: {
       orderBy: "createdAt_DESC",
+      limit: 10000, // remove default limiting data (20 default) because i want to make a pagination if i use limit and skip i can't find the full length of data
     },
   });
 

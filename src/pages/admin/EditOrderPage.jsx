@@ -1,20 +1,107 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { DetailItem, RenderIf } from "../../components";
 import { Base, Navbar } from "../../containers";
+import {
+  CREATEBORROW,
+  UPDATEBOOKMUTATE,
+  UPDATEORDER,
+} from "../../graphql/mutations";
 import { GETORDER } from "../../graphql/queries";
+import moment from "moment";
 
 export default function EditOrderPage() {
   const { id } = useParams();
-  const { data, loading } = useQuery(GETORDER, {
+  const { data, loading, refetch } = useQuery(GETORDER, {
     variables: {
       id,
     },
   });
 
+  const [updateBook, { loading: updateBookLoading }] = useMutation(
+    UPDATEBOOKMUTATE,
+    {
+      onCompleted: () => {
+        refetch();
+      },
+      onError: (err) => {
+        toast.error(err.message);
+      },
+    }
+  );
+
+  const [updateOrder, { loading: updateOrderLoading }] = useMutation(
+    UPDATEORDER,
+    {
+      onError: (err) => {
+        toast.error(err.message);
+      },
+      onCompleted: () => {
+        refetch();
+      },
+    }
+  );
+  const [createBorrow, { loading: loadingBorrow }] = useMutation(CREATEBORROW, {
+    onError: (err) => {
+      toast.error(err.message);
+    },
+    onCompleted: () => {
+      toast.success("Successfully create borrow!");
+      refetch();
+      const inputUpdateBook = {
+        status: "BORROWED",
+      };
+
+      const inputUpdateOrder = {
+        status: "APPROVED",
+      };
+      updateBook({
+        variables: {
+          input: inputUpdateBook,
+          id: data?.order?.book?.id,
+        },
+      });
+
+      updateOrder({
+        variables: {
+          input: inputUpdateOrder,
+          id: data?.order?.id,
+        },
+      });
+    },
+  });
+
+  const startBorrow = () => {
+    if (data?.order?.book?.status !== "AVAILABLE") {
+      toast.error("Can't start borrow, Book Still Borrowed!");
+    } else {
+      const inputBorrow = {
+        dateStart: moment(new Date(data?.order?.dateStart)).format(
+          "YYYY-MM-DD H:m:s"
+        ),
+        dueDate: moment(new Date(data?.order?.dueDate)).format(
+          "YYYY-MM-DD H:m:s"
+        ),
+        bookId: data?.order?.book?.id,
+        userId: data?.order?.user?.id,
+      };
+
+      createBorrow({
+        variables: {
+          input: inputBorrow,
+        },
+      });
+    }
+  };
+
   return (
-    <Base isLoading={loading}>
+    <Base
+      isLoading={
+        loading || updateBookLoading || loadingBorrow || updateOrderLoading
+      }
+    >
       <Navbar />
 
       <section className="py-14">
@@ -115,21 +202,14 @@ export default function EditOrderPage() {
               </div>
             </RenderIf>
 
-            {/* <div className="text-right w-full mt-8 space-x-9">
-          <button
-            className="bg-brownLightPastel hover:bg-brownLight text-lg font-bold px-12 py-3 rounded-xl text-white shadow-lg"
-            disabled={false}
-            onClick={() => modalHandler("Order Book")}
-          >
-            Order
-          </button>
-          <button
-            className="bg-brownLightPastel hover:bg-brownLight text-lg font-bold px-12 py-3 rounded-xl text-white shadow-lg"
-            onClick={() => modalHandler("Booking Book")}
-          >
-            Booking Book
-          </button>
-        </div> */}
+            <div className="text-right w-full mt-8 space-x-9">
+              <button
+                className="bg-brownLightPastel hover:bg-brownLight text-lg font-bold px-12 py-3 rounded-xl text-white shadow-lg"
+                onClick={startBorrow}
+              >
+                Start Borrow
+              </button>
+            </div>
           </div>
         </div>
       </section>
