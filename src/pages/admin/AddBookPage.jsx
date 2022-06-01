@@ -42,7 +42,7 @@ export default function AddBookPage() {
       toast.error(error.message);
     },
     onCompleted: () => {
-      toast.success("Successfully Update Book!");
+      toast.success("Successfully Add Book!");
       navigation("/admin/books");
     },
   });

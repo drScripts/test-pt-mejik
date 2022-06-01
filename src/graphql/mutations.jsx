@@ -75,3 +75,11 @@ export const UPDATERACK = gql`
     }
   }
 `;
+
+export const ADDRACK = gql`
+  mutation addRack($input: CreateRackInput!) {
+    createRack(input: $input) {
+      id
+    }
+  }
+`;

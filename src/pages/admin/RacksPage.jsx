@@ -30,7 +30,7 @@ export default function RacksPage() {
         <div className="flex justify-between items-center mb-10">
           <h1 className="font-bold text-4xl font-libre">Racks List</h1>
           <Link
-            to={"/admin/books/add"}
+            to={"/admin/racks/add"}
             className="w-14 h-14 bg-blue-400 rounded-lg flex items-center justify-center"
           >
             <PlusIcon width={30} height={30} color={"#fff"} />
