@@ -110,3 +110,39 @@ export const GETORDERSQUERY = gql`
     }
   }
 `;
+
+export const GETORDER = gql`
+  query getOrder($id: String!) {
+    order(id: $id) {
+      dateStart
+      dueDate
+      book {
+        description
+        name
+        code
+        name
+        cover
+        status
+        rack {
+          name
+        }
+        author {
+          name
+          photo
+        }
+        category {
+          name
+        }
+      }
+      user {
+        firstName
+        id
+        lastName
+        phoneNumber
+        email
+      }
+      status
+      id
+    }
+  }
+`;

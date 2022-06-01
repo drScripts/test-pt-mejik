@@ -11,15 +11,15 @@ const navigationAdminList = [
     title: "Orders",
   },
   {
-    path: "/",
+    path: "/admin/books",
     title: "Books",
   },
   {
-    path: "/",
+    path: "/admin/racks",
     title: "Racks",
   },
   {
-    path: "/",
+    path: "/admin/categories",
     title: "Categories",
   },
 ];
@@ -58,7 +58,10 @@ export default function Navbar() {
                   >
                     <div
                       className={`px-9 ${
-                        params === navAdmin.path ? "bg-brownLight" : ""
+                        params.search(navAdmin.path) !== -1 ||
+                        (params === "/admin" && i === 0)
+                          ? "bg-brownLight"
+                          : ""
                       } rounded-full py-3`}
                     >
                       {navAdmin.title}

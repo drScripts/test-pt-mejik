@@ -6,6 +6,7 @@ import { GETUSER } from "./graphql/queries";
 import {
   AdminOrdersPage,
   DetailBookPage,
+  EditOrderPage,
   HomePage,
   LoginPage,
   RegisterPage,
@@ -46,6 +47,9 @@ export default function App() {
         <Route path="/book/:id" element={<DetailBookPage />} />
         <Route path="/admin">
           <Route index element={<AdminOrdersPage />} />
+          <Route path="/admin/orders">
+            <Route path="/admin/orders/:id" element={<EditOrderPage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
