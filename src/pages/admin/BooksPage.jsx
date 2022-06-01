@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useMemo, useState } from "react";
 import { CustomTable } from "../../components";
 import { Base, Navbar } from "../../containers";
@@ -6,21 +6,34 @@ import { LISTBOOKQUERY } from "../../graphql/queries";
 import { Link } from "react-router-dom";
 import { PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 import { PlusIcon } from "@heroicons/react/solid";
-
-const tableTitles = [
-  "Book Name",
-  "Book Code",
-  "Rack",
-  "Author Name",
-  "Category",
-  "Status",
-  "Actions",
-];
+import { DELETEBOOKMUTATE } from "../../graphql/mutations";
+import { toast } from "react-toastify";
 
 export default function BooksPage() {
   const limitData = 10;
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, loading } = useQuery(LISTBOOKQUERY);
+  const { data, loading, refetch } = useQuery(LISTBOOKQUERY);
+  const [deleteBook, { loading: loadingDelete }] = useMutation(
+    DELETEBOOKMUTATE,
+    {
+      onError: (error) => {
+        toast.error(error.message);
+      },
+      onCompleted: () => {
+        toast.success("Successfully delete book!");
+        refetch();
+      },
+    }
+  );
+  const tableTitles = [
+    "Book Name",
+    "Book Code",
+    "Rack",
+    "Author Name",
+    "Category",
+    "Status",
+    "Actions",
+  ];
 
   const booksDataTable = useMemo(() => {
     const pageFirst = (currentPage - 1) * limitData;
@@ -33,7 +46,7 @@ export default function BooksPage() {
   };
 
   return (
-    <Base isLoading={loading}>
+    <Base isLoading={loading || loadingDelete}>
       <Navbar />
       <div className="container mx-auto py-20">
         <div className="flex justify-between items-center mb-10">
@@ -81,16 +94,27 @@ export default function BooksPage() {
                 </span>
               </td>
               <td className="border-b py-3 border-slate-600 text-left font-bold flex space-x-6">
-                <Link to={`/admin/books/${book?.id}`}>
+                <Link
+                  to={`/admin/books/${book?.id}`}
+                  className={"cursor-pointer"}
+                >
                   <div className={"bg-yellow-400 p-2 w-max rounded-xl"}>
                     <PencilAltIcon width={30} height={30} color={"#fff"} />
                   </div>
                 </Link>
-                <Link to={"/"}>
-                  <div className={"bg-red-600 p-2 w-max rounded-xl"}>
-                    <TrashIcon width={30} height={30} color={"#fff"} />
-                  </div>
-                </Link>
+
+                <button
+                  className={"bg-red-600 p-2 w-max rounded-xl cursor-pointer"}
+                  onClick={() =>
+                    deleteBook({
+                      variables: {
+                        id: book?.id,
+                      },
+                    })
+                  }
+                >
+                  <TrashIcon width={30} height={30} color={"#fff"} />
+                </button>
               </td>
             </tr>
           ))}

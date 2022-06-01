@@ -59,3 +59,11 @@ export const ADDBOOKMUTATE = gql`
     }
   }
 `;
+
+export const DELETEBOOKMUTATE = gql`
+  mutation deleteBook($id: String!) {
+    deleteBook(id: $id) {
+      id
+    }
+  }
+`;
