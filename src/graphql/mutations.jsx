@@ -99,3 +99,13 @@ export const UPDATECATEGORY = gql`
     }
   }
 `;
+
+export const ADDCATEGORY = gql`
+  mutation createCategory($input: CreateCategoryInput!) {
+    createCategory(input: $input) {
+      id
+      code
+      name
+    }
+  }
+`;

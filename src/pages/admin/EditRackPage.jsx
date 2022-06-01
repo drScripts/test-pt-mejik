@@ -73,12 +73,12 @@ export default function EditRackPage() {
             id={"name"}
             value={form.name}
             placeholder={"Insert the title of rack"}
-            label={"Book Name"}
+            label={"Rack Name"}
             required
             onChange={onFormChange}
           />
           <GeneralInput
-            label={"Book Code"}
+            label={"Rack Code"}
             value={form.code}
             name={"code"}
             id={"code"}

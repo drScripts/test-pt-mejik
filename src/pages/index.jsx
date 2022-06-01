@@ -12,6 +12,7 @@ import EditRackPage from "./admin/EditRackPage";
 import AddRackPage from "./admin/AddRackPage";
 import CategoriesPage from "./admin/CategoriesPage";
 import EditCategoryPage from "./admin/EditCategoryPage";
+import AddCategoryPage from "./admin/AddCategoryPage";
 
 export {
   HomePage,
@@ -28,4 +29,5 @@ export {
   AddRackPage,
   CategoriesPage,
   EditCategoryPage,
+  AddCategoryPage,
 };

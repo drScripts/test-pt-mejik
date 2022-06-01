@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GETUSER } from "./graphql/queries";
 import {
   AddBookPage,
+  AddCategoryPage,
   AddRackPage,
   AdminOrdersPage,
   BooksPage,
@@ -63,6 +64,7 @@ export default function App() {
           <Route path="/admin/racks/add" element={<AddRackPage />} />
           <Route path="/admin/racks/:id" element={<EditRackPage />} />
           <Route path="/admin/categories" element={<CategoriesPage />} />
+          <Route path="/admin/categories/add" element={<AddCategoryPage />} />
           <Route path="/admin/categories/:id" element={<EditCategoryPage />} />
         </Route>
       </Routes>
