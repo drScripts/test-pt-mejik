@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useMemo, useState } from "react";
 import { CustomTable } from "../../components";
 import { Base, Navbar } from "../../containers";
@@ -6,12 +6,24 @@ import { GETRACKS } from "../../graphql/queries";
 import { Link } from "react-router-dom";
 import { PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 import { PlusIcon } from "@heroicons/react/solid";
+import { DELETERACK } from "../../graphql/mutations";
+import { toast } from "react-toastify";
 
 export default function RacksPage() {
   const limitData = 10;
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, loading } = useQuery(GETRACKS);
+  const { data, loading, refetch } = useQuery(GETRACKS);
   const tableTitles = ["Rack Name", "Rack Code", "Actions"];
+
+  const [deleteRack, { loading: loadingDelete }] = useMutation(DELETERACK, {
+    onError: (error) => {
+      toast.error(error.message);
+    },
+    onCompleted: () => {
+      toast.success("Successfully delete rack!");
+      refetch();
+    },
+  });
 
   const racksDataTable = useMemo(() => {
     const pageFirst = (currentPage - 1) * limitData;
@@ -24,7 +36,7 @@ export default function RacksPage() {
   };
 
   return (
-    <Base isLoading={loading}>
+    <Base isLoading={loading || loadingDelete}>
       <Navbar />
       <div className="container mx-auto py-20">
         <div className="flex justify-between items-center mb-10">
@@ -63,6 +75,13 @@ export default function RacksPage() {
 
                 <button
                   className={"bg-red-600 p-2 w-max rounded-xl cursor-pointer"}
+                  onClick={() =>
+                    deleteRack({
+                      variables: {
+                        id: rack?.id,
+                      },
+                    })
+                  }
                 >
                   <TrashIcon width={30} height={30} color={"#fff"} />
                 </button>

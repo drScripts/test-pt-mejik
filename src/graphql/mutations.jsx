@@ -83,3 +83,11 @@ export const ADDRACK = gql`
     }
   }
 `;
+
+export const DELETERACK = gql`
+  mutation deleteRack($id: String!) {
+    deleteRack(id: $id) {
+      id
+    }
+  }
+`;
