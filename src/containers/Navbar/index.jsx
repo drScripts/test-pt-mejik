@@ -12,6 +12,11 @@ const navigationAdminList = [
     title: "Orders",
   },
   {
+    path: "/admin/borrows",
+    title: "Borrows",
+    identifier: "borrows",
+  },
+  {
     path: "/admin/books",
     identifier: "books",
     title: "Books",

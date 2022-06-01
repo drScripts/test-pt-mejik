@@ -13,6 +13,7 @@ import AddRackPage from "./admin/AddRackPage";
 import CategoriesPage from "./admin/CategoriesPage";
 import EditCategoryPage from "./admin/EditCategoryPage";
 import AddCategoryPage from "./admin/AddCategoryPage";
+import BorrowsPage from "./admin/BorrowsPage";
 
 export {
   HomePage,
@@ -30,4 +31,5 @@ export {
   CategoriesPage,
   EditCategoryPage,
   AddCategoryPage,
+  BorrowsPage,
 };

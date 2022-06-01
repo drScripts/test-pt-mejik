@@ -202,3 +202,32 @@ export const GETCATEGORY = gql`
     }
   }
 `;
+
+export const GETBORROWS = gql`
+  query borrows(
+    $where: BorrowFilter
+    $or: [BorrowFilter]
+    $orderBy: BorrowOrderBy
+    $limit: Int
+  ) {
+    borrows(where: $where, or: $or, orderBy: $orderBy, limit: $limit) {
+      status
+      id
+      dateStart
+      dueDate
+      returnDate
+      pinaltyDays
+      penalties
+      user {
+        id
+        firstName
+        lastName
+      }
+      book {
+        name
+        cover
+        id
+      }
+    }
+  }
+`;

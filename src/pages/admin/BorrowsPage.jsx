@@ -5,24 +5,27 @@ import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { CustomTable } from "../../components";
 import { Base, Navbar } from "../../containers";
-import { GETORDERSQUERY } from "../../graphql/queries";
+import { GETBORROWS } from "../../graphql/queries";
 
 const tableTitles = [
   "User Name",
   "Book Name",
   "Start Date",
   "End Date",
+  "Return Date",
+  "Penalties",
+  "Penalty Days",
   "Status",
   "Actions",
 ];
 
-export default function AdminOrdersPage() {
+export default function BorrowsPage() {
   const [currentPage, setcurrentPage] = useState(1);
   const generateReadableDate = (dateString) => {
     return moment(new Date(dateString)).format("DD, MMM YYYY H:m");
   };
 
-  const { data, loading } = useQuery(GETORDERSQUERY, {
+  const { data, loading } = useQuery(GETBORROWS, {
     variables: {
       orderBy: "createdAt_DESC",
       limit: 10000, // remove default limiting data (20 default) because i want to make a pagination if i use limit and skip i can't find the full length of data
@@ -33,7 +36,7 @@ export default function AdminOrdersPage() {
     const maxData = 10;
     const pageCountFirst = (currentPage - 1) * maxData;
     const pageCountEnd = pageCountFirst + maxData;
-    return data?.orders?.slice(pageCountFirst, pageCountEnd);
+    return data?.borrows?.slice(pageCountFirst, pageCountEnd);
   }, [currentPage, data]);
 
   const onPaginationClick = (page) => {
@@ -44,41 +47,54 @@ export default function AdminOrdersPage() {
     <Base isLoading={loading}>
       <Navbar />
       <div className="container mx-auto py-20">
-        <h1 className="mb-10 font-bold text-4xl font-libre">Orders List</h1>
+        <h1 className="mb-10 font-bold text-4xl font-libre">Borrows List</h1>
         <CustomTable
           titles={tableTitles}
           onPaginationClick={onPaginationClick}
           currentPage={currentPage}
-          totalPage={Math.ceil(data?.orders?.length / 10)}
+          totalPage={Math.ceil(data?.borrows?.length / 10)}
           withPagination
         >
-          {currentDataTable?.map((order, i) => (
+          {currentDataTable?.map((borrow, i) => (
             <tr className="p-2" key={i}>
               <td className="border-b p-3 border-slate-600 text-left font-medium">
-                {`${order?.user?.firstName} ${order?.user?.lastName}`}
+                {`${borrow?.user?.firstName} ${borrow?.user?.lastName}`}
               </td>
               <td className="border-b p-3 border-slate-600 text-left font-medium">
-                {order?.book?.name}
+                {borrow?.book?.name}
               </td>
               <td className="border-b p-3 border-slate-600 text-left font-medium">
-                {generateReadableDate(order?.dateStart)}
+                {generateReadableDate(borrow?.dateStart)}
               </td>
               <td className="border-b p-3 border-slate-600 text-left font-medium">
-                {generateReadableDate(order?.dueDate)}
+                {generateReadableDate(borrow?.dueDate)}
+              </td>
+              <td className="border-b p-3 border-slate-600 text-left font-medium">
+                {borrow?.returnDate
+                  ? generateReadableDate(borrow?.returnDate)
+                  : "-"}
+              </td>
+              <td className="border-b p-3 border-slate-600 text-left font-medium">
+                {borrow?.pinaltyDays ? `${borrow?.pinaltyDays} Days` : "-"}
+              </td>
+              <td className="border-b p-3 border-slate-600 text-left font-medium">
+                {borrow?.penalties ? `${borrow?.penalties}` : "-"}
               </td>
               <td className="border-b p-3 border-slate-600 text-left font-bold">
                 <span
                   className={`${
-                    order?.status === "APPROVED"
+                    borrow?.status === "ON_TIME"
                       ? "text-green-400"
-                      : "text-yellow-300"
+                      : borrow?.status === "BORROWED"
+                      ? "text-yellow-300"
+                      : "text-red-600"
                   } `}
                 >
-                  {order?.status}
+                  {borrow?.status ?? "-"}
                 </span>
               </td>
               <td className="border-b py-3 border-slate-600 text-left font-bold flex space-x-6">
-                <Link to={`/admin/orders/${order?.id}`}>
+                <Link to={`/admin/orders/${borrow?.id}`}>
                   <div className={"bg-yellow-400 p-2 w-max rounded-xl"}>
                     <PencilAltIcon width={30} height={30} color={"#fff"} />
                   </div>
