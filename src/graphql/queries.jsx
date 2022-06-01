@@ -159,8 +159,12 @@ export const GETAUTORSQUERY = gql`
 `;
 
 export const GETCATEGORIES = gql`
-  query {
-    categories {
+  query getCategories(
+    $or: [CategoryFilter]
+    $where: CategoryFilter
+    $orderBy: CategoryOrderBy
+  ) {
+    categories(or: $or, where: $where, orderBy: $orderBy) {
       name
       code
       id
