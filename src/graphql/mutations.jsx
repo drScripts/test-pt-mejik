@@ -91,3 +91,11 @@ export const DELETERACK = gql`
     }
   }
 `;
+
+export const UPDATECATEGORY = gql`
+  mutation updateCategory($id: String!, $input: UpdateCategoryInput!) {
+    updateCategory(input: $input, id: $id) {
+      id
+    }
+  }
+`;

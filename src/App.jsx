@@ -11,6 +11,7 @@ import {
   CategoriesPage,
   DetailBookPage,
   DetailBookPageAdmin,
+  EditCategoryPage,
   EditOrderPage,
   EditRackPage,
   HomePage,
@@ -62,6 +63,7 @@ export default function App() {
           <Route path="/admin/racks/add" element={<AddRackPage />} />
           <Route path="/admin/racks/:id" element={<EditRackPage />} />
           <Route path="/admin/categories" element={<CategoriesPage />} />
+          <Route path="/admin/categories/:id" element={<EditCategoryPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -191,3 +191,13 @@ export const GETRACK = gql`
     }
   }
 `;
+
+export const GETCATEGORY = gql`
+  query getCategory($id: String!) {
+    category(id: $id) {
+      name
+      code
+      id
+    }
+  }
+`;
