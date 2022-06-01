@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BookCard, ToggledSearchInput } from "../../components";
 import { useQuery } from "@apollo/client";
 import { useSearchParams } from "react-router-dom";
-import { LISTQUERY } from "../../graphql/queries";
+import { LISTBOOKQUERY } from "../../graphql/queries";
 
 export default function ListBooks() {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -11,7 +11,7 @@ export default function ListBooks() {
     setSearchParams({ q: e.target.value });
   };
 
-  const { data, refetch } = useQuery(LISTQUERY, {
+  const { data, refetch } = useQuery(LISTBOOKQUERY, {
     variables: searchParams.get("q")
       ? {
           or: [

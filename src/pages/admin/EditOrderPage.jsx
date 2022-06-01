@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { DetailItem, RenderIf } from "../components";
-import { Base, Navbar } from "../containers";
-import { GETORDER } from "../graphql/queries";
+import { DetailItem, RenderIf } from "../../components";
+import { Base, Navbar } from "../../containers";
+import { GETORDER } from "../../graphql/queries";
 
 export default function EditOrderPage() {
   const { id } = useParams();

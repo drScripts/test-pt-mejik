@@ -51,7 +51,7 @@ export const GETUSER = gql`
   }
 `;
 
-export const LISTQUERY = gql`
+export const LISTBOOKQUERY = gql`
   query listBook($or: [BookFilter], $where: BookFilter) {
     books(or: $or, where: $where) {
       name

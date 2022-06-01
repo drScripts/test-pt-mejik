@@ -8,19 +8,23 @@ import { userLogout } from "../../reducers/root";
 const navigationAdminList = [
   {
     path: "/admin",
+    identifier: "/orders",
     title: "Orders",
   },
   {
     path: "/admin/books",
+    identifier: "books",
     title: "Books",
   },
   {
     path: "/admin/racks",
     title: "Racks",
+    identifier: "racks",
   },
   {
     path: "/admin/categories",
     title: "Categories",
+    identifier: "categories",
   },
 ];
 
@@ -58,7 +62,7 @@ export default function Navbar() {
                   >
                     <div
                       className={`px-9 ${
-                        params.search(navAdmin.path) !== -1 ||
+                        params.search(navAdmin.identifier) !== -1 ||
                         (params === "/admin" && i === 0)
                           ? "bg-brownLight"
                           : ""

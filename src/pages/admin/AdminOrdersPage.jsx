@@ -3,9 +3,9 @@ import { PencilAltIcon, TrashIcon } from "@heroicons/react/solid";
 import moment from "moment";
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { CustomTable } from "../components";
-import { Base, Navbar } from "../containers";
-import { GETORDERSQUERY } from "../graphql/queries";
+import { CustomTable } from "../../components";
+import { Base, Navbar } from "../../containers";
+import { GETORDERSQUERY } from "../../graphql/queries";
 
 const tableTitles = [
   "User Name",

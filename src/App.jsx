@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GETUSER } from "./graphql/queries";
 import {
   AdminOrdersPage,
+  BooksPage,
   DetailBookPage,
   EditOrderPage,
   HomePage,
@@ -47,9 +48,8 @@ export default function App() {
         <Route path="/book/:id" element={<DetailBookPage />} />
         <Route path="/admin">
           <Route index element={<AdminOrdersPage />} />
-          <Route path="/admin/orders">
-            <Route path="/admin/orders/:id" element={<EditOrderPage />} />
-          </Route>
+          <Route path="/admin/orders/:id" element={<EditOrderPage />} />
+          <Route path="/admin/books" element={<BooksPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
