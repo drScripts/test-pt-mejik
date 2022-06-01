@@ -80,7 +80,7 @@ export default function BooksPage() {
                 </span>
               </td>
               <td className="border-b py-3 border-slate-600 text-left font-bold flex space-x-6">
-                <Link to={`/admin/orders/${book?.id}`}>
+                <Link to={`/admin/books/${book?.id}`}>
                   <div className={"bg-yellow-400 p-2 w-max rounded-xl"}>
                     <PencilAltIcon width={30} height={30} color={"#fff"} />
                   </div>

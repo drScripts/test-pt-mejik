@@ -7,6 +7,7 @@ import {
   AdminOrdersPage,
   BooksPage,
   DetailBookPage,
+  DetailBookPageAdmin,
   EditOrderPage,
   HomePage,
   LoginPage,
@@ -50,6 +51,7 @@ export default function App() {
           <Route index element={<AdminOrdersPage />} />
           <Route path="/admin/orders/:id" element={<EditOrderPage />} />
           <Route path="/admin/books" element={<BooksPage />} />
+          <Route path="/admin/books/:id" element={<DetailBookPageAdmin />} />
         </Route>
       </Routes>
     </BrowserRouter>

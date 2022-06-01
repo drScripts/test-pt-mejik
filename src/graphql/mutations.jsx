@@ -38,3 +38,13 @@ export const REGISTERQUERY = gql`
     }
   }
 `;
+
+export const UPDATEBOOKMUTATE = gql`
+  mutation updateBook($id: String!, $input: UpdateBookInput!) {
+    updateBook(input: $input, id: $id) {
+      name
+      cover
+      id
+    }
+  }
+`;

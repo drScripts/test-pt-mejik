@@ -146,3 +146,34 @@ export const GETORDER = gql`
     }
   }
 `;
+
+export const GETAUTORSQUERY = gql`
+  query getAuthors {
+    authors {
+      name
+      id
+      photo
+      biography
+    }
+  }
+`;
+
+export const GETCATEGORIES = gql`
+  query {
+    categories {
+      name
+      code
+      id
+    }
+  }
+`;
+
+export const GETRACKS = gql`
+  query getRacks {
+    racks {
+      name
+      code
+      id
+    }
+  }
+`;

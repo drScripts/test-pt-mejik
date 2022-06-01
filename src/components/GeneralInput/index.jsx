@@ -1,4 +1,5 @@
 import React from "react";
+import RenderIf from "../RenderIf";
 
 export default function GeneralInput({
   id,
@@ -19,16 +20,29 @@ export default function GeneralInput({
       </label>
       <div className="border-2 border-gray-400 px-2 py-3 rounded-xl flex space-x-3">
         {icon}
-        <input
-          type={type}
-          name={name}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          id={id}
-          className={"w-full outline-none text-lg"}
-          required={required}
-        />
+        <RenderIf condition={/text|datetime-local|email|password/i.test(type)}>
+          <input
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+            id={id}
+            className={"w-full outline-none text-lg bg-transparent"}
+            required={required}
+          />
+        </RenderIf>
+        <RenderIf condition={type === "area"}>
+          <textarea
+            name="description"
+            placeholder={placeholder}
+            id={id}
+            className={"w-full outline-none text-lg bg-transparent"}
+            onChange={onChange}
+            required
+            value={value}
+          />
+        </RenderIf>
       </div>
     </div>
   );
