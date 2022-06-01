@@ -1,54 +1,51 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { GeneralInput } from "../../components";
 import SelectOption from "../../components/SelectCustom";
 import { Base, Navbar } from "../../containers";
-import { UPDATEBOOKMUTATE } from "../../graphql/mutations";
-import {
-  DETAILBOOKQUERY,
-  GETAUTORSQUERY,
-  GETCATEGORIES,
-  GETRACKS,
-} from "../../graphql/queries";
+import { ADDBOOKMUTATE } from "../../graphql/mutations";
+import { GETAUTORSQUERY, GETCATEGORIES, GETRACKS } from "../../graphql/queries";
 
-export default function DetailBookPage() {
-  const { id } = useParams();
+export default function AddBookPage() {
   const navigation = useNavigate();
   const [form, setForm] = useState({
     name: "",
     description: "",
     code: "",
-    category: {},
-    rack: {},
-    author: {},
+    category: {
+      id: null,
+      name: "Select Book Category ",
+      selector: "category",
+    },
+    rack: {
+      id: null,
+      name: "Select Book Rack ",
+      selector: "rack",
+    },
+    author: {
+      id: null,
+      name: "Select Book Author",
+      selector: "author",
+    },
     cover: "",
   });
 
   const { data: authors, loading: loadingAuthors } = useQuery(GETAUTORSQUERY);
-
-  const { data, loading } = useQuery(DETAILBOOKQUERY, {
-    variables: {
-      id,
-    },
-  });
   const { data: categories, loading: loadingCategories } =
     useQuery(GETCATEGORIES);
   const { data: racks, loading: loadingRacks } = useQuery(GETRACKS);
 
-  const [updateBook, { loading: updateeLoading }] = useMutation(
-    UPDATEBOOKMUTATE,
-    {
-      onError: (error) => {
-        toast.error(error.message);
-      },
-      onCompleted: () => {
-        toast.success("Successfully Update Book!");
-        navigation("/admin/books");
-      },
-    }
-  );
+  const [addBook, { loading: updateeLoading }] = useMutation(ADDBOOKMUTATE, {
+    onError: (error) => {
+      toast.error(error.message);
+    },
+    onCompleted: () => {
+      toast.success("Successfully Update Book!");
+      navigation("/admin/books");
+    },
+  });
 
   const authorsData = useMemo(() => {
     return authors?.authors?.map((author) => ({
@@ -77,34 +74,6 @@ export default function DetailBookPage() {
     }));
   }, [racks]);
 
-  useEffect(() => {
-    setForm({
-      name: data?.book?.name ?? "",
-      author: {
-        id: data?.book?.author?.id,
-        name: data?.book?.author?.name,
-        unavailable: false,
-        selector: "author",
-      },
-      category: {
-        id: data?.book?.category?.id,
-        name: data?.book?.category?.name,
-        unavailable: false,
-        selector: "category",
-      },
-      description: data?.book?.description ?? "",
-      rack: {
-        id: data?.book?.rack?.id,
-        name: data?.book?.rack?.name,
-        unavailable: false,
-        selector: "rack",
-      },
-      code: data?.book?.code ?? "",
-      cover: data?.book?.cover ?? "",
-    });
-    console.clear();
-  }, [data]);
-
   const onFormChange = (e) => {
     setForm({
       ...form,
@@ -121,9 +90,9 @@ export default function DetailBookPage() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    updateBook({
+    console.log(form);
+    addBook({
       variables: {
-        id,
         input: {
           name: form.name,
           description: form.description,
@@ -140,18 +109,12 @@ export default function DetailBookPage() {
   return (
     <Base
       isLoading={
-        loading ||
-        loadingAuthors ||
-        loadingCategories ||
-        loadingRacks ||
-        updateeLoading
+        loadingAuthors || loadingCategories || loadingRacks || updateeLoading
       }
     >
       <Navbar />
       <div className="container mx-auto mb-20">
-        <h1 className="py-7 text-3xl font-libre font-bold">
-          Detail Book - {data?.book?.code}
-        </h1>
+        <h1 className="py-7 text-3xl font-libre font-bold">Add New Book</h1>
         <form onSubmit={onSubmit}>
           <GeneralInput
             name={"name"}
@@ -164,7 +127,6 @@ export default function DetailBookPage() {
           />
           <GeneralInput
             label={"Book Code"}
-            required
             value={form.code}
             name={"code"}
             id={"code"}
@@ -185,6 +147,7 @@ export default function DetailBookPage() {
           />
           <GeneralInput
             label={"Book Description"}
+            required
             value={form.description}
             name={"description"}
             id={"description"}
@@ -229,7 +192,7 @@ export default function DetailBookPage() {
           />
           <div className="text-right mt-10">
             <button className="px-5 py-2 bg-brownLightPastel hover:bg-brownLight rounded-lg text-xl font-medium font-libre">
-              Update Book
+              Add Book
             </button>
           </div>
         </form>

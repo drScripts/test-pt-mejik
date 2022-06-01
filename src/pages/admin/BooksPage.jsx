@@ -36,12 +36,13 @@ export default function BooksPage() {
     <Base isLoading={loading}>
       <Navbar />
       <div className="container mx-auto py-20">
-        <div className="flex justify-between items-center">
-          <h1 className="mb-10 font-bold text-4xl font-libre">Books List</h1>
-          <Link to={"/"} className="/">
-            <div className="p-4">
-              <PlusIcon width={30} height={30} color={"#fff"} />
-            </div>
+        <div className="flex justify-between items-center mb-10">
+          <h1 className="font-bold text-4xl font-libre">Books List</h1>
+          <Link
+            to={"/admin/books/add"}
+            className="w-14 h-14 bg-blue-400 rounded-lg flex items-center justify-center"
+          >
+            <PlusIcon width={30} height={30} color={"#fff"} />
           </Link>
         </div>
         <CustomTable

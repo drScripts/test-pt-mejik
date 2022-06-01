@@ -48,6 +48,7 @@ export default function ListBooks() {
               key={book.id}
               authorName={book?.author?.name}
               id={book?.id}
+              cover={book?.cover}
             />
           ))}
         </div>

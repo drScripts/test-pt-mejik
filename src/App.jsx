@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GETUSER } from "./graphql/queries";
 import {
+  AddBookPage,
   AdminOrdersPage,
   BooksPage,
   DetailBookPage,
@@ -51,6 +52,7 @@ export default function App() {
           <Route index element={<AdminOrdersPage />} />
           <Route path="/admin/orders/:id" element={<EditOrderPage />} />
           <Route path="/admin/books" element={<BooksPage />} />
+          <Route path="/admin/books/add" element={<AddBookPage />} />
           <Route path="/admin/books/:id" element={<DetailBookPageAdmin />} />
         </Route>
       </Routes>

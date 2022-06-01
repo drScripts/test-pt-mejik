@@ -16,7 +16,7 @@ export default function GeneralInput({
   return (
     <div className={`flex flex-col ${className}`}>
       <label className="text-xl mb-1" htmlFor={id}>
-        {label}
+        {label} {required ? "*" : "(optional)"}
       </label>
       <div className="border-2 border-gray-400 px-2 py-3 rounded-xl flex space-x-3">
         {icon}

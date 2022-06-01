@@ -48,3 +48,14 @@ export const UPDATEBOOKMUTATE = gql`
     }
   }
 `;
+
+export const ADDBOOKMUTATE = gql`
+  mutation createBook($input: CreateBookInput!) {
+    createBook(input: $input) {
+      id
+      name
+      code
+      status
+    }
+  }
+`;
