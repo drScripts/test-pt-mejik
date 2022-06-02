@@ -1,5 +1,5 @@
-import { BookCard, SearchInput } from "../components";
-import { Base, ListBooks, Navbar } from "../containers";
+import { SearchInput } from "../components";
+import { Base, BestOrderBookx, ListBooks, Navbar } from "../containers";
 import heroIllustration from "../assets/images/hero-illustration.png";
 
 function HomePage() {
@@ -28,12 +28,7 @@ function HomePage() {
       <section className="py-12">
         <div className="container mx-auto">
           <h2 className="text-3xl font-libre font-medium">Best Borrowed</h2>
-          <div className="flex overflow-x-scroll overflow-y-hidden py-14 space-x-52">
-            <BookCard name={"On Night Like This"} />
-            <BookCard name={"On Night Like What I want"} />
-            <BookCard name={"On Night Like Like this"} />
-            <BookCard name={"On Night like that"} />
-          </div>
+          <BestOrderBookx />
         </div>
       </section>
 

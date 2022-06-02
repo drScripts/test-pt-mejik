@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -13,11 +13,9 @@ import {
 import { Base, Navbar } from "../containers";
 import { CREATEORDER } from "../graphql/mutations";
 import { CHECKBOOKBORROWED, DETAILBOOKQUERY } from "../graphql/queries";
-import { setAppLoading } from "../reducers/root";
 
 export default function DetailBookPage() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const rootState = useSelector((state) => state.root);
   const [modal, setModal] = useState({ show: false, title: "" });
   const [form, setForm] = useState({
@@ -41,20 +39,8 @@ export default function DetailBookPage() {
     }
   );
 
-  const [createOrder, { data: dataOrder, loading: loadingCreateOrder, error }] =
+  const [createOrder, { data: dataOrder, loading: loadingCreateOrder }] =
     useMutation(CREATEORDER);
-
-  useEffect(() => {
-    if (error) {
-      toast.error(error.message);
-    }
-
-    dispatch(
-      setAppLoading({
-        condition: loading || loadingCheckBorrowed || loadingCreateOrder,
-      })
-    );
-  }, [loading, dispatch, loadingCheckBorrowed, loadingCreateOrder, error]);
 
   useEffect(() => {
     if (dataOrder) {
@@ -107,11 +93,18 @@ export default function DetailBookPage() {
 
     createOrder({
       variables: { input },
+      onCompleted: () => {
+        toast.success("Success Request Order!");
+        navigate("/profile");
+      },
+      onError: (err) => {
+        toast.error(err.message);
+      },
     });
   };
 
   return (
-    <Base>
+    <Base isLoading={loading || loadingCheckBorrowed || loadingCreateOrder}>
       <Navbar />
       <CustomDialog
         show={modal.show}

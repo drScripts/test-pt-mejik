@@ -63,7 +63,7 @@ export default function App() {
         <Route path="/borrows/:id" element={<UserDetailBorrowPage />} />
         <Route element={<MainMiddleware />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/book/:id" element={<DetailBookPage />} />
+          <Route path="/books/:id" element={<DetailBookPage />} />
         </Route>
         <Route element={<AuthMiddleware />}>
           <Route path="/login" element={<LoginPage />} />

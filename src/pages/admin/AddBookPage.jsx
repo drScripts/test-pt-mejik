@@ -90,7 +90,7 @@ export default function AddBookPage() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+
     addBook({
       variables: {
         input: {

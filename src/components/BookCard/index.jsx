@@ -13,7 +13,7 @@ export default function BookCard({ name, authorName, id, cover }) {
           "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1626716201l/57577167.jpg"
         }
         alt="book shown"
-        className="shadow-2xl w-40 rounded-md"
+        className="shadow-2xl w-40 rounded-md h-full"
       />
       <div className="py-4 max-w-xs flex flex-col h-full justify-between">
         <div>
@@ -24,7 +24,7 @@ export default function BookCard({ name, authorName, id, cover }) {
           <p className="text-softLightBrown text-xl mb-4">{authorName}</p>
         </div>
         <Link
-          to={`/book/${id}`}
+          to={`/books/${id}`}
           className="border-2 font-medium border-brownLight text-brownLight text-xl py-2 rounded-full hover:bg-brownLight hover:text-white text-center"
         >
           Detail
