@@ -14,6 +14,7 @@ import CategoriesPage from "./admin/CategoriesPage";
 import EditCategoryPage from "./admin/EditCategoryPage";
 import AddCategoryPage from "./admin/AddCategoryPage";
 import BorrowsPage from "./admin/BorrowsPage";
+import DetailBorrowPage from "./admin/DetailBorrowPage";
 
 export {
   HomePage,
@@ -32,4 +33,5 @@ export {
   EditCategoryPage,
   AddCategoryPage,
   BorrowsPage,
+  DetailBorrowPage,
 };

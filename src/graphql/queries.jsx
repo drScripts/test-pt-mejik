@@ -231,3 +231,48 @@ export const GETBORROWS = gql`
     }
   }
 `;
+
+export const GETBORROW = gql`
+  query borrow($id: String!) {
+    borrow(id: $id) {
+      id
+      status
+      dateStart
+      dueDate
+      returnDate
+      pinaltyDays
+      penalties
+      book {
+        id
+        name
+        code
+        cover
+        description
+        status
+        category {
+          name
+          code
+          id
+        }
+        author {
+          name
+          photo
+          biography
+          id
+        }
+        rack {
+          name
+          code
+          id
+        }
+      }
+      user {
+        id
+        firstName
+        lastName
+        email
+        phoneNumber
+      }
+    }
+  }
+`;

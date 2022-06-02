@@ -137,3 +137,17 @@ export const UPDATEORDER = gql`
     }
   }
 `;
+
+export const UPDATEBORROW = gql`
+  mutation updateBorrow($id: String!, $input: UpdateBorrowInput!) {
+    updateBorrow(input: $input, id: $id) {
+      dateStart
+      dueDate
+      returnDate
+      pinaltyDays
+      penalties
+      id
+      status
+    }
+  }
+`;

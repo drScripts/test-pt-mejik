@@ -13,6 +13,7 @@ import {
   CategoriesPage,
   DetailBookPage,
   DetailBookPageAdmin,
+  DetailBorrowPage,
   EditCategoryPage,
   EditOrderPage,
   EditRackPage,
@@ -68,6 +69,7 @@ export default function App() {
           <Route path="/admin/categories/add" element={<AddCategoryPage />} />
           <Route path="/admin/categories/:id" element={<EditCategoryPage />} />
           <Route path="/admin/borrows" element={<BorrowsPage />} />
+          <Route path="/admin/borrows/:id" element={<DetailBorrowPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

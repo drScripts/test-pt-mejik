@@ -94,16 +94,11 @@ export default function BorrowsPage() {
                 </span>
               </td>
               <td className="border-b py-3 border-slate-600 text-left font-bold flex space-x-6">
-                <Link to={`/admin/orders/${borrow?.id}`}>
+                <Link to={`/admin/borrows/${borrow?.id}`}>
                   <div className={"bg-yellow-400 p-2 w-max rounded-xl"}>
                     <PencilAltIcon width={30} height={30} color={"#fff"} />
                   </div>
                 </Link>
-                {/* <Link to={"/"}>
-                  <div className={"bg-red-600 p-2 w-max rounded-xl"}>
-                    <TrashIcon width={30} height={30} color={"#fff"} />
-                  </div>
-                </Link> */}
               </td>
             </tr>
           ))}
