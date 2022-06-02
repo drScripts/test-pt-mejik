@@ -69,6 +69,7 @@ export default function EditOrderPage() {
         ),
         bookId: data?.order?.book?.id,
         userId: data?.order?.user?.id,
+        status: "BORROWED",
       };
 
       createBorrow({
