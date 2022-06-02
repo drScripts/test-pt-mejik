@@ -12,7 +12,11 @@ import { toast } from "react-toastify";
 export default function RacksPage() {
   const limitData = 10;
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, loading, refetch } = useQuery(GETRACKS);
+  const { data, loading, refetch } = useQuery(GETRACKS, {
+    variables: {
+      limit: 100000,
+    },
+  });
   const tableTitles = ["Rack Name", "Rack Code", "Actions"];
 
   const [deleteRack, { loading: loadingDelete }] = useMutation(DELETERACK, {

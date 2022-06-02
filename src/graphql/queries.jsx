@@ -164,8 +164,9 @@ export const GETCATEGORIES = gql`
     $or: [CategoryFilter]
     $where: CategoryFilter
     $orderBy: CategoryOrderBy
+    $limit: Int
   ) {
-    categories(or: $or, where: $where, orderBy: $orderBy) {
+    categories(or: $or, where: $where, orderBy: $orderBy, limit: $limit) {
       name
       code
       id
@@ -174,8 +175,13 @@ export const GETCATEGORIES = gql`
 `;
 
 export const GETRACKS = gql`
-  query getRacks($or: [RackFilter], $where: RackFilter, $orderBy: RackOrderBy) {
-    racks(or: $or, where: $where, orderBy: $orderBy) {
+  query getRacks(
+    $or: [RackFilter]
+    $where: RackFilter
+    $orderBy: RackOrderBy
+    $limit: Int
+  ) {
+    racks(or: $or, where: $where, orderBy: $orderBy, limit: $limit) {
       name
       code
       id

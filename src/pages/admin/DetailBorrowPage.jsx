@@ -228,7 +228,11 @@ export default function DetailBorrowPage() {
                 Return Date :{" "}
               </p>
               <p className="mt-3 whitespace-pre-wrap text-justify text-xl font-libre text-medium">
-                {`${generateReadableDate(data?.borrow?.returnDate) ?? "-"}`}
+                {`${
+                  data?.borrow?.returnDate
+                    ? generateReadableDate(data?.borrow?.returnDate)
+                    : "-"
+                }`}
               </p>
             </div>
 
