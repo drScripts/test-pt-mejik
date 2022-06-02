@@ -40,6 +40,19 @@
   animation: float 4s ease-in-out infinite;
 }
 
+.spin-animate {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
 @keyframes float {
   0% {
     transform: translatey(0px);

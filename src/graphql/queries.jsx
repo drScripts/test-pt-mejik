@@ -52,8 +52,8 @@ export const GETUSER = gql`
 `;
 
 export const LISTBOOKQUERY = gql`
-  query listBook($or: [BookFilter], $where: BookFilter) {
-    books(or: $or, where: $where) {
+  query listBook($or: [BookFilter], $where: BookFilter, $limit: Int) {
+    books(or: $or, where: $where, limit: $limit) {
       name
       cover
       description

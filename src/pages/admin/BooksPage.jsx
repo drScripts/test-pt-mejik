@@ -1,9 +1,9 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { CustomTable } from "../../components";
 import { Base, Navbar } from "../../containers";
 import { LISTBOOKQUERY } from "../../graphql/queries";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 import { PlusIcon } from "@heroicons/react/solid";
 import { DELETEBOOKMUTATE } from "../../graphql/mutations";
@@ -12,7 +12,12 @@ import { toast } from "react-toastify";
 export default function BooksPage() {
   const limitData = 10;
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, loading, refetch } = useQuery(LISTBOOKQUERY);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { data, loading, refetch } = useQuery(LISTBOOKQUERY, {
+    variables: {
+      limit: 100000,
+    },
+  });
   const [deleteBook, { loading: loadingDelete }] = useMutation(
     DELETEBOOKMUTATE,
     {
@@ -45,6 +50,26 @@ export default function BooksPage() {
     setCurrentPage(page);
   };
 
+  const onSearchChange = (e) => {
+    setSearchParams({ q: e.target.value });
+  };
+
+  useEffect(() => {
+    const query = searchParams.get("q");
+    refetch({
+      or: [
+        {
+          name_contains: query,
+        },
+        {
+          category: {
+            name_contains: query,
+          },
+        },
+      ],
+    });
+  }, [refetch, searchParams]);
+
   return (
     <Base isLoading={loading || loadingDelete}>
       <Navbar />
@@ -53,7 +78,7 @@ export default function BooksPage() {
           <h1 className="font-bold text-4xl font-libre">Books List</h1>
           <Link
             to={"/admin/books/add"}
-            className="w-14 h-14 bg-blue-400 rounded-lg flex items-center justify-center"
+            className={`w-14 h-14 bg-blue-400 rounded-lg flex items-center justify-center`}
           >
             <PlusIcon width={30} height={30} color={"#fff"} />
           </Link>
@@ -64,6 +89,13 @@ export default function BooksPage() {
           totalPage={Math.ceil(data?.books?.length / limitData)}
           onPaginationClick={paginationCllickHandler}
           withPagination
+          loading={loading}
+          onRefetchClick={() => {
+            refetch();
+          }}
+          showRefetch
+          showSearch
+          onSearchChange={onSearchChange}
         >
           {booksDataTable?.map((book, i) => (
             <tr className="p-2" key={i}>

@@ -2,13 +2,13 @@ import { SearchIcon } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
 import React, { useRef } from "react";
 
-export default function ToggledSearchInput({ onChange }) {
+export default function ToggledSearchInput({ onChange, maxWidth = "700px" }) {
   const widthRef = useRef(null);
   const inputRef = useRef(null);
   const closeRef = useRef(null);
 
   const onIconClick = () => {
-    widthRef.current.style.width = "700px";
+    widthRef.current.style.width = maxWidth;
     widthRef.current.classList.add("shadow-lg", "bg-white");
     inputRef.current.style.display = "inline";
     closeRef.current.style.display = "inline";
@@ -24,7 +24,7 @@ export default function ToggledSearchInput({ onChange }) {
   return (
     <div
       ref={widthRef}
-      className="transition ease-in-out py-2 px-2  rounded-full flex space-x-4"
+      className="transition ease-in-out py-2 px-2 rounded-full flex space-x-4 cursor-pointer"
       style={{ width: 46 }}
     >
       <SearchIcon width={30} height={30} onClick={onIconClick} />
