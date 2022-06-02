@@ -1,7 +1,7 @@
 import React from "react";
 import { SearchIcon } from "@heroicons/react/outline";
 
-export default function SearchInput({ className }) {
+export default function SearchInput({ className, onChange, onKeyDown, value }) {
   return (
     <div className={className}>
       <div className="flex bg-white px-4 py-4 rounded-full space-x-7 shadow-md">
@@ -10,6 +10,9 @@ export default function SearchInput({ className }) {
           type="text"
           placeholder="Titles, author, or topics"
           className="w-full placeholder:text-softLightBrown placeholder:text-xl text-xl outline-none"
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          value={value}
         />
       </div>
     </div>

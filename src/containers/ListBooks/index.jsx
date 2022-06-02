@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { useSearchParams } from "react-router-dom";
 import { LISTBOOKQUERY } from "../../graphql/queries";
 
-export default function ListBooks() {
+export default function ListBooks({ refs }) {
   let [searchParams, setSearchParams] = useSearchParams();
 
   const searchInputHanlder = (e) => {
@@ -36,7 +36,7 @@ export default function ListBooks() {
     <section className="py-12">
       <div className="container mx-auto">
         <div className="flex items-center space-x-8">
-          <h2 className="text-3xl font-libre font-medium">
+          <h2 className="text-3xl font-libre font-medium" ref={refs}>
             All Available Books
           </h2>
           <ToggledSearchInput onChange={searchInputHanlder} />

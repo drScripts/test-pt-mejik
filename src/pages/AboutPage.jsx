@@ -32,7 +32,9 @@ export default function AboutPage() {
       </section>
 
       <section className="container mx-auto mb-24">
-        <h1 className="text-center text-4xl font-bold font-libre">Our Offer</h1>
+        <h1 className="text-center text-4xl font-bold font-libre animate__animated animate__fadeIn">
+          Our Offer
+        </h1>
         <div className="flex items-center justify-center space-x-14 mt-16">
           <OfferCard
             src={bookIcon}
@@ -40,6 +42,7 @@ export default function AboutPage() {
               "More than 1000 books that available for you to borrow it and read it from anywhere!"
             }
             title={"Alot Of Books"}
+            className={"animate__animated animate__fadeInLeft"}
           />
           <OfferCard
             src={calendarIcon}
@@ -47,6 +50,7 @@ export default function AboutPage() {
               "You can borrow your books without any limitation of how long you want to borrow!"
             }
             title={"No Limitation"}
+            className={"animate__animated animate__fadeInUp"}
           />
           <OfferCard
             src={costIcon}
@@ -54,6 +58,7 @@ export default function AboutPage() {
               "Don't worry we will charge a very low cost when you return the book late! Dont late!"
             }
             title={"Low Penalty Cost"}
+            className={"animate__animated animate__fadeInRight"}
           />
         </div>
       </section>

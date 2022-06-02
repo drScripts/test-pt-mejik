@@ -1,4 +1,6 @@
 import { Menu } from "@headlessui/react";
+import { LogoutIcon } from "@heroicons/react/outline";
+import { UserIcon } from "@heroicons/react/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { RenderIf } from "../../components";
@@ -122,30 +124,49 @@ export default function Navbar() {
                         "flex flex-col absolute bg-white right-2 py-4 px-2 rounded-xl w-48 cursor-pointer"
                       }
                     >
-                      <Menu.Item>
-                        {({ active }) => (
-                          <p
-                            className={`${active && "text-blue-500"}`}
-                            onClick={() => dispatch(userLogout())}
-                          >
-                            Logout
-                          </p>
-                        )}
-                      </Menu.Item>
                       <RenderIf
                         condition={rootState?.user?.role === "AUTHENTICATED"}
                       >
                         <Menu.Item>
                           {({ active }) => (
-                            <Link
-                              className={`${active && "text-blue-500"}`}
-                              to="/profile"
-                            >
-                              Profile
+                            <Link to={"/profile"}>
+                              <div className="flex items-center space-x-4">
+                                <UserIcon
+                                  width={25}
+                                  height={25}
+                                  color={active && "#0ea5e9"}
+                                />
+                                <p
+                                  className={`${
+                                    active && "text-blue-500"
+                                  } font-medium text-lg `}
+                                >
+                                  Profile
+                                </p>
+                              </div>
                             </Link>
                           )}
                         </Menu.Item>
                       </RenderIf>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <div className="flex items-center space-x-4 mt-3">
+                            <LogoutIcon
+                              width={25}
+                              height={25}
+                              color={active ? "#0ea5e9" : "#f43f5e"}
+                            />
+                            <p
+                              className={`${
+                                active ? "text-blue-500" : "text-red-500"
+                              } font-medium text-lg `}
+                              onClick={() => dispatch(userLogout())}
+                            >
+                              Logout
+                            </p>
+                          </div>
+                        )}
+                      </Menu.Item>
                     </Menu.Items>
                   </Menu>
                 </div>

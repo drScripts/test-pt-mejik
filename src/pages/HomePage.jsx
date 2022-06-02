@@ -1,8 +1,31 @@
 import { SearchInput } from "../components";
 import { Base, BestOrderBookx, ListBooks, Navbar } from "../containers";
 import heroIllustration from "../assets/images/hero-illustration.png";
+import { useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 function HomePage() {
+  const [mainSearch, setMainSearch] = useState("");
+  const [, setSearchParams] = useSearchParams();
+  const mainListBook = useRef();
+  const onKeyDownSearch = (e) => {
+    if (e.code === "Enter") {
+      if (mainListBook.current) {
+        mainListBook.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
+        });
+        setSearchParams({ q: mainSearch });
+        setMainSearch("");
+      }
+    }
+  };
+
+  const onMainSearchChange = (e) => {
+    setMainSearch(e.target.value);
+  };
+
   return (
     <Base>
       <Navbar />
@@ -20,6 +43,9 @@ function HomePage() {
                 className={
                   "mt-3 animate__animated animate__slideInUp animate__slow"
                 }
+                onKeyDown={onKeyDownSearch}
+                value={mainSearch}
+                onChange={onMainSearchChange}
               />
             </div>
             <div className="max-h-min animate__animated animate__jackInTheBox">
@@ -41,7 +67,7 @@ function HomePage() {
         </div>
       </section>
 
-      <ListBooks />
+      <ListBooks refs={mainListBook} />
     </Base>
   );
 }
