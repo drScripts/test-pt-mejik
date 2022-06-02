@@ -3,6 +3,9 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GETUSER } from "./graphql/queries";
+import AdminMiddleware from "./middleware/AdminMiddleware";
+import AuthMiddleware from "./middleware/AuthMiddleware";
+import MainMiddleware from "./middleware/MainMiddleware";
 import {
   AddBookPage,
   AddCategoryPage,
@@ -52,11 +55,15 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/book/:id" element={<DetailBookPage />} />
-        <Route path="/admin">
+        <Route element={<MainMiddleware />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/book/:id" element={<DetailBookPage />} />
+        </Route>
+        <Route element={<AuthMiddleware />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
+        <Route path="/admin" element={<AdminMiddleware />}>
           <Route index element={<AdminOrdersPage />} />
           <Route path="/admin/orders/:id" element={<EditOrderPage />} />
           <Route path="/admin/books" element={<BooksPage />} />

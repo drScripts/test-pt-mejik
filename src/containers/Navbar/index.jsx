@@ -48,9 +48,9 @@ export default function Navbar() {
             <div className="flex items-center space-x-3">
               <RenderIf condition={rootState?.user?.role === "AUTHENTICATED"}>
                 <div className="px-9 bg-brownLight rounded-full py-3">
-                  <a href="http://localhost" className="text-xl font-medium">
+                  <Link to="/" className="text-xl font-medium">
                     Books
-                  </a>
+                  </Link>
                 </div>
                 <div className="px-9 rounded-full py-3">
                   <a href="http://localhost" className="text-xl font-medium">
@@ -90,7 +90,6 @@ export default function Navbar() {
                   </Link>
                 </div>
               </RenderIf>
-
               <RenderIf condition={rootState.isLogin}>
                 <div>
                   <a href="http://localhost">
@@ -108,7 +107,7 @@ export default function Navbar() {
                     </Menu.Button>
                     <Menu.Items
                       className={
-                        "flex flex-col absolute bg-white right-2 py-4 px-2 rounded-xl w-48"
+                        "flex flex-col absolute bg-white right-2 py-4 px-2 rounded-xl w-48 cursor-pointer"
                       }
                     >
                       <Menu.Item>
@@ -121,16 +120,20 @@ export default function Navbar() {
                           </p>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            className={`${active && "text-blue-500"}`}
-                            href="/account-settings"
-                          >
-                            Documentation
-                          </a>
-                        )}
-                      </Menu.Item>
+                      <RenderIf
+                        condition={rootState?.user?.role === "AUTHENTICATED"}
+                      >
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              className={`${active && "text-blue-500"}`}
+                              href="/account-settings"
+                            >
+                              Documentation
+                            </a>
+                          )}
+                        </Menu.Item>
+                      </RenderIf>
                     </Menu.Items>
                   </Menu>
                 </div>

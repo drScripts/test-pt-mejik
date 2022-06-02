@@ -37,6 +37,7 @@ export default function DetailBorrowPage() {
     {
       onCompleted: () => {
         refetch();
+        toast.success("Successfully borrow the book!");
       },
       onError: (err) => {
         toast.error(err.message);
@@ -45,17 +46,26 @@ export default function DetailBorrowPage() {
   );
 
   const startBorrow = () => {
+    if (!moment(new Date(data?.borrow?.dateStart)).isSame(new Date(), "day")) {
+      toast.error("I'ts not time to start borrow the book!");
+      return;
+    }
+
     if (data?.borrow?.book?.status !== "AVAILABLE") {
       toast.error("Can't start borrow, Book Still Borrowed!");
     } else {
       updateBook({
         variables: {
-          status: "BORROWED",
+          input: { status: "BORROWED" },
+          id: data?.borrow?.book?.id,
         },
       });
       updateBorrow({
         variables: {
-          status: "BORROWED",
+          input: {
+            status: "BORROWED",
+          },
+          id,
         },
       });
     }
@@ -65,9 +75,9 @@ export default function DetailBorrowPage() {
     const due = moment(new Date(data?.borrow?.dueDate));
     const today = moment(new Date());
     const pinaltyDays = due.diff(today, "days");
-    const status = pinaltyDays > 0 ? "OVER_TIME" : "ON_TIME";
+    const status = pinaltyDays > 0 ? "OVER_DUE" : "ON_TIME";
     const input = {
-      returnDate: today.format("DD, MMM YYYY H:m:s"),
+      returnDate: today.format("YYYY-MM-DD H:m:s"),
       pinaltyDays,
       status,
     };

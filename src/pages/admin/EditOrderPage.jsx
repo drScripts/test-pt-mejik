@@ -127,6 +127,14 @@ export default function EditOrderPage() {
             id,
           },
         });
+        updateBook({
+          variables: {
+            input: {
+              status: "AVAILABLE",
+            },
+            id: data?.order?.book?.id,
+          },
+        });
       },
     });
   };

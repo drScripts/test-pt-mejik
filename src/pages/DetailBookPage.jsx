@@ -182,7 +182,9 @@ export default function DetailBookPage() {
                 title={"Availability"}
                 value={data?.book?.status}
                 valueClass={`${
-                  data?.book?.status ? "text-green-600" : "text-red-600"
+                  data?.book?.status === "AVAILABLE"
+                    ? "text-green-600"
+                    : "text-red-600"
                 } capitalize`}
               />
               <DetailItem
@@ -221,13 +223,6 @@ export default function DetailBookPage() {
             </p>
 
             <div className="text-right w-full mt-8 space-x-9">
-              <button
-                className="bg-brownLightPastel hover:bg-brownLight text-lg font-bold px-12 py-3 rounded-xl text-white shadow-lg"
-                disabled={false}
-                onClick={() => modalHandler("Order Book")}
-              >
-                Order
-              </button>
               <button
                 className="bg-brownLightPastel hover:bg-brownLight text-lg font-bold px-12 py-3 rounded-xl text-white shadow-lg"
                 onClick={() => modalHandler("Booking Book")}
