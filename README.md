@@ -1,6 +1,6 @@
 # Deployed URL
 
-[](Story Book)
+[Story Book](https://story-book-drscripts.netlify.app/)
 
 # Logic Admin Order And Borrows
 
