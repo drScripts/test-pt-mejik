@@ -7,6 +7,9 @@ import GeneralInput from "./GeneralInput";
 import DetailItem from "./DetailItem";
 import CustomDialog from "./CustomDialog";
 import CustomTable from "./CustomTable";
+import HistoryOrder from "./HistoryOrder";
+import HistoryBorrow from "./HistoryBorrow";
+import BorrowCard from "./BorrowCard";
 
 export {
   SearchInput,
@@ -18,4 +21,7 @@ export {
   DetailItem,
   CustomDialog,
   CustomTable,
+  HistoryOrder,
+  HistoryBorrow,
+  BorrowCard,
 };

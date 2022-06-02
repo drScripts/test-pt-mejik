@@ -17,13 +17,16 @@ import {
   DetailBookPage,
   DetailBookPageAdmin,
   DetailBorrowPage,
+  DetailOrderPage,
   EditCategoryPage,
   EditOrderPage,
   EditRackPage,
   HomePage,
   LoginPage,
+  ProfilePage,
   RacksPage,
   RegisterPage,
+  UserDetailBorrowPage,
 } from "./pages";
 import { userSuccessLogin } from "./reducers/root";
 
@@ -55,6 +58,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/orders/:id" element={<DetailOrderPage />} />
+        <Route path="/borrows/:id" element={<UserDetailBorrowPage />} />
         <Route element={<MainMiddleware />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/book/:id" element={<DetailBookPage />} />

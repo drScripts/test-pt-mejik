@@ -80,14 +80,20 @@ export default function Navbar() {
             </div>
             <div className="flex items-center space-x-5">
               <RenderIf condition={!rootState.isLogin}>
-                <div className="px-7 py-2 border border-brownLight bg-brownLight rounded-xl">
-                  <Link to={"/login"}>Login</Link>
-                </div>
-                <div className="border px-7 py-2 rounded-xl">
-                  <Link className="text-xl font-medium" to={"/register"}>
-                    Register
-                  </Link>
-                </div>
+                <Link
+                  to={"/login"}
+                  className={
+                    "border px-7 py-2 rounded-xl border-brownLight hover:bg-brownLight bg-brownLightPastel font-medium"
+                  }
+                >
+                  Login
+                </Link>
+                <Link
+                  className="text-xl font-medium border px-7 py-2 rounded-xl"
+                  to={"/register"}
+                >
+                  Register
+                </Link>
               </RenderIf>
               <RenderIf condition={rootState.isLogin}>
                 <div className="relative">
@@ -95,7 +101,9 @@ export default function Navbar() {
                     <Menu.Button>
                       <img
                         src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                        className={"rounded-full w-9 h-9"}
+                        className={
+                          "rounded-full w-12 h-12 box-fit object-cover"
+                        }
                         alt="profile"
                       />
                     </Menu.Button>
@@ -119,12 +127,12 @@ export default function Navbar() {
                       >
                         <Menu.Item>
                           {({ active }) => (
-                            <a
+                            <Link
                               className={`${active && "text-blue-500"}`}
-                              href="/account-settings"
+                              to="/profile"
                             >
                               Profile
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                       </RenderIf>
