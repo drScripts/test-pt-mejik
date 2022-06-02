@@ -46,16 +46,26 @@ export default function Navbar() {
             <div className="text-2xl font-bold">StoryBooks</div>
             <div className="flex items-center space-x-3">
               <RenderIf condition={rootState?.user?.role === "AUTHENTICATED"}>
-                <div className="px-9 bg-brownLight rounded-full py-3">
-                  <Link to="/" className="text-xl font-medium">
+                <Link to="/" className="text-xl font-medium">
+                  <div
+                    className={`px-9 rounded-full py-3 ${
+                      params === "/" || params.search("/books") !== -1
+                        ? "bg-brownLight "
+                        : ""
+                    }`}
+                  >
                     Books
-                  </Link>
-                </div>
-                <div className="px-9 rounded-full py-3">
-                  <a href="http://localhost" className="text-xl font-medium">
+                  </div>
+                </Link>
+                <Link to="/about" className="text-xl font-medium">
+                  <div
+                    className={`px-9 rounded-full py-3 ${
+                      params === "/about" ? "bg-brownLight" : ""
+                    }`}
+                  >
                     About
-                  </a>
-                </div>
+                  </div>
+                </Link>
               </RenderIf>
               <RenderIf condition={rootState?.user?.role === "STAFF"}>
                 {navigationAdminList.map((navAdmin, i) => (

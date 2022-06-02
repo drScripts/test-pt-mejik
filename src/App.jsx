@@ -7,6 +7,7 @@ import AdminMiddleware from "./middleware/AdminMiddleware";
 import AuthMiddleware from "./middleware/AuthMiddleware";
 import MainMiddleware from "./middleware/MainMiddleware";
 import {
+  AboutPage,
   AddBookPage,
   AddCategoryPage,
   AddRackPage,
@@ -61,6 +62,7 @@ export default function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/orders/:id" element={<DetailOrderPage />} />
         <Route path="/borrows/:id" element={<UserDetailBorrowPage />} />
+        <Route path="about" element={<AboutPage />} />
         <Route element={<MainMiddleware />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/books/:id" element={<DetailBookPage />} />

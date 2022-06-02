@@ -10,6 +10,7 @@ import CustomTable from "./CustomTable";
 import HistoryOrder from "./HistoryOrder";
 import HistoryBorrow from "./HistoryBorrow";
 import BorrowCard from "./BorrowCard";
+import OfferCard from "./OfferCard";
 
 export {
   SearchInput,
@@ -24,4 +25,5 @@ export {
   HistoryOrder,
   HistoryBorrow,
   BorrowCard,
+  OfferCard,
 };

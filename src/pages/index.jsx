@@ -18,6 +18,7 @@ import DetailBorrowPage from "./admin/DetailBorrowPage";
 import ProfilePage from "./ProfilePage";
 import DetailOrderPage from "./DetailOrderPage";
 import UserDetailBorrowPage from "./DetailBorrowPage";
+import AboutPage from "./AboutPage";
 
 export {
   HomePage,
@@ -40,4 +41,5 @@ export {
   ProfilePage,
   DetailOrderPage,
   UserDetailBorrowPage,
+  AboutPage,
 };

@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./reducers/root";
 import { Provider } from "react-redux";
+import "animate.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
