@@ -39,7 +39,7 @@ export default function GeneralInput({
             id={id}
             className={"w-full outline-none text-lg bg-transparent"}
             onChange={onChange}
-            required
+            required={required}
             value={value}
           />
         </RenderIf>

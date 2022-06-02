@@ -1,5 +1,4 @@
 import { Menu } from "@headlessui/react";
-import { BookmarkIcon } from "@heroicons/react/outline";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { RenderIf } from "../../components";
@@ -91,11 +90,6 @@ export default function Navbar() {
                 </div>
               </RenderIf>
               <RenderIf condition={rootState.isLogin}>
-                <div>
-                  <a href="http://localhost">
-                    <BookmarkIcon width={30} height={30} />
-                  </a>
-                </div>
                 <div className="relative">
                   <Menu>
                     <Menu.Button>
@@ -129,7 +123,7 @@ export default function Navbar() {
                               className={`${active && "text-blue-500"}`}
                               href="/account-settings"
                             >
-                              Documentation
+                              Profile
                             </a>
                           )}
                         </Menu.Item>
