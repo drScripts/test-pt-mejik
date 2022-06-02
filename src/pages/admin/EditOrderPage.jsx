@@ -19,6 +19,9 @@ export default function EditOrderPage() {
       id,
     },
   });
+  const generateReadableDate = (dateString) => {
+    return moment(new Date(dateString)).format("DD, MMM YYYY H:m");
+  };
 
   const [updateBook, { loading: updateBookLoading }] = useMutation(
     UPDATEBOOKMUTATE,
@@ -50,26 +53,6 @@ export default function EditOrderPage() {
     onCompleted: () => {
       toast.success("Successfully create borrow!");
       refetch();
-      const inputUpdateBook = {
-        status: "BORROWED",
-      };
-
-      const inputUpdateOrder = {
-        status: "APPROVED",
-      };
-      updateBook({
-        variables: {
-          input: inputUpdateBook,
-          id: data?.order?.book?.id,
-        },
-      });
-
-      updateOrder({
-        variables: {
-          input: inputUpdateOrder,
-          id: data?.order?.id,
-        },
-      });
     },
   });
 
@@ -92,8 +75,60 @@ export default function EditOrderPage() {
         variables: {
           input: inputBorrow,
         },
+        onCompleted: () => {
+          const inputUpdateBook = {
+            status: "BORROWED",
+          };
+
+          const inputUpdateOrder = {
+            status: "APPROVED",
+          };
+
+          updateBook({
+            variables: {
+              input: inputUpdateBook,
+              id: data?.order?.book?.id,
+            },
+          });
+
+          updateOrder({
+            variables: {
+              input: inputUpdateOrder,
+              id: data?.order?.id,
+            },
+          });
+        },
       });
     }
+  };
+
+  const approveOrder = () => {
+    const inputBorrow = {
+      dateStart: moment(new Date(data?.order?.dateStart)).format(
+        "YYYY-MM-DD H:m:s"
+      ),
+      dueDate: moment(new Date(data?.order?.dueDate)).format(
+        "YYYY-MM-DD H:m:s"
+      ),
+      bookId: data?.order?.book?.id,
+      userId: data?.order?.user?.id,
+      status: null,
+    };
+    createBorrow({
+      variables: {
+        input: inputBorrow,
+      },
+      onCompleted: () => {
+        updateOrder({
+          variables: {
+            input: {
+              status: "APPROVED",
+            },
+            id,
+          },
+        });
+      },
+    });
   };
 
   return (
@@ -201,15 +236,42 @@ export default function EditOrderPage() {
                 </p>
               </div>
             </RenderIf>
-
-            <div className="text-right w-full mt-8 space-x-9">
-              <button
-                className="bg-brownLightPastel hover:bg-brownLight text-lg font-bold px-12 py-3 rounded-xl text-white shadow-lg"
-                onClick={startBorrow}
-              >
-                Start Borrow
-              </button>
+            <h1 className="font-bold font-libre text-3xl mt-14">
+              Borrow Detail
+            </h1>
+            <div className="flex x-space-9 items-center">
+              <p className="mt-3 whitespace-pre-wrap text-justify text-xl font-libre text-bold">
+                Start Date Days :{" "}
+              </p>
+              <p className="mt-3 whitespace-pre-wrap text-justify text-xl font-libre text-medium">
+                {`${generateReadableDate(data?.order?.dateStart)}`}
+              </p>
             </div>
+            <div className="flex x-space-9 items-center">
+              <p className="mt-3 whitespace-pre-wrap text-justify text-xl font-libre text-bold">
+                End Date Days :{" "}
+              </p>
+              <p className="mt-3 whitespace-pre-wrap text-justify text-xl font-libre text-medium">
+                {`${generateReadableDate(data?.order?.dueDate)}`}
+              </p>
+            </div>
+            <RenderIf condition={data?.order?.status === "PENDING"}>
+              <div className="text-right w-full mt-8 space-x-9">
+                <button
+                  className="bg-brownLightPastel hover:bg-brownLight text-lg font-bold px-12 py-3 rounded-xl text-white shadow-lg"
+                  onClick={startBorrow}
+                >
+                  Start Borrow
+                </button>
+
+                <button
+                  className="bg-brownLightPastel hover:bg-brownLight text-lg font-bold px-12 py-3 rounded-xl text-white shadow-lg"
+                  onClick={approveOrder}
+                >
+                  Approve Order
+                </button>
+              </div>
+            </RenderIf>
           </div>
         </div>
       </section>
