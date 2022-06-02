@@ -11,6 +11,7 @@ import HistoryOrder from "./HistoryOrder";
 import HistoryBorrow from "./HistoryBorrow";
 import BorrowCard from "./BorrowCard";
 import OfferCard from "./OfferCard";
+import CategoryPill from "./CategoryPill";
 
 export {
   SearchInput,
@@ -26,4 +27,5 @@ export {
   HistoryBorrow,
   BorrowCard,
   OfferCard,
+  CategoryPill,
 };
