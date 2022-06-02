@@ -17,6 +17,7 @@ const tableTitles = [
 ];
 
 export default function AdminOrdersPage() {
+  document.title = "Story Book Admin | Orders";
   const [currentPage, setcurrentPage] = useState(1);
   const generateReadableDate = (dateString) => {
     return moment(new Date(dateString)).format("DD, MMM YYYY H:m");

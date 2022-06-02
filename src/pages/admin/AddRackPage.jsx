@@ -7,6 +7,7 @@ import { Base, Navbar } from "../../containers";
 import { ADDRACK } from "../../graphql/mutations";
 
 export default function AddRackPage() {
+  document.title = "Story Book Admin | Add Rack";
   const navigation = useNavigate();
 
   const [form, setForm] = useState({

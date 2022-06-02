@@ -14,6 +14,7 @@ import {
 } from "../../graphql/queries";
 
 export default function DetailBookPage() {
+  document.title = "Story Book Admin | Detail Book";
   const { id } = useParams();
   const navigation = useNavigate();
   const [form, setForm] = useState({

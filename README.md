@@ -1,70 +1,13 @@
-# Getting Started with Create React App
+# Deployed URL
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[](Story Book)
 
-## Available Scripts
+# Logic Admin Order And Borrows
 
-In the project directory, you can run:
+## Admin Order
 
-### `npm start`
+First the user will request to borrow the book and this request will make a new order with status pending. Admin can see the detail of user order at `EditOrderPage.jsx`. Theres 2 options for admin, admin can just **approve** the order which mean it doesnt make the book status `BORROWED` yet and just create a borrow data become null status. Option 2 admin can **Start Borrow** the order, this event will create a borrow data with `BORROWED` status and make the book status becom `BORROWED` to.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Admin Borrow
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+In `DetailBorrowPage.jsx` admin will have some event **Start Borrow** event / button will appear when the borrow data status was `null` this event will update the borrow status become `BORROWED` and the **book status** to. Second event / button **Start Return** will appear when the borrow status was `BORROWED` and will calculate the `dueDate` data with `new Date()` or date today to get the differrence of days which mean will canculate the `penaltyDays` and update the status corresponding to penaltyDays if there any penaltyDays status was `OVER_DUE` or not the status will `ON_TIME`.

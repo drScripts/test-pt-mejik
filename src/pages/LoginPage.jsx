@@ -10,6 +10,7 @@ import { LOGINQUERY } from "../graphql/mutations";
 import { setAppLoading, userSuccessLogin } from "../reducers/root";
 
 export default function LoginPage() {
+  document.title = "Story Book | Login";
   const dispatch = useDispatch();
 
   const [login, { loading, data, error }] = useMutation(LOGINQUERY);

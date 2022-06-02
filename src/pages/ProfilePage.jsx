@@ -6,6 +6,7 @@ import { HistoryBorrow, HistoryOrder } from "../components";
 import { Base, Navbar } from "../containers";
 
 export default function ProfilePage() {
+  document.title = "Story Book | Profile";
   const [userHistory, setUserHistory] = useState({});
   const rootState = useSelector((state) => state.root);
 

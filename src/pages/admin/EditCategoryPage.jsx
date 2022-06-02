@@ -8,6 +8,7 @@ import { UPDATECATEGORY } from "../../graphql/mutations";
 import { GETCATEGORY } from "../../graphql/queries";
 
 export default function EditCategoryPage() {
+  document.title = "Story Book Admin | Detail Category";
   const navigation = useNavigate();
   const { id } = useParams();
 

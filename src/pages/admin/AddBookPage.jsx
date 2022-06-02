@@ -9,6 +9,7 @@ import { ADDBOOKMUTATE } from "../../graphql/mutations";
 import { GETAUTORSQUERY, GETCATEGORIES, GETRACKS } from "../../graphql/queries";
 
 export default function AddBookPage() {
+  document.title = "Story Book Admin | Add Book";
   const navigation = useNavigate();
   const [form, setForm] = useState({
     name: "",

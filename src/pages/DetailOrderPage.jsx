@@ -7,6 +7,7 @@ import { GETORDER } from "../graphql/queries";
 import moment from "moment";
 
 export default function DetailOrderPage() {
+  document.title = "Story Book | Detail Order";
   const { id } = useParams();
   const { data, loading } = useQuery(GETORDER, {
     variables: {

@@ -13,6 +13,7 @@ import { GETORDER } from "../../graphql/queries";
 import moment from "moment";
 
 export default function EditOrderPage() {
+  document.title = "Story Book Admin | Detail Order";
   const { id } = useParams();
   const { data, loading, refetch } = useQuery(GETORDER, {
     variables: {

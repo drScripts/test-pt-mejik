@@ -7,6 +7,7 @@ import costIcon from "../assets/icons/cost.png";
 import { OfferCard } from "../components";
 
 export default function AboutPage() {
+  document.title = "Story Book | About";
   return (
     <Base>
       <Navbar />

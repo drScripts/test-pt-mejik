@@ -15,6 +15,7 @@ import { CREATEORDER } from "../graphql/mutations";
 import { CHECKBOOKBORROWED, DETAILBOOKQUERY } from "../graphql/queries";
 
 export default function DetailBookPage() {
+  document.title = "Story Book | Detail Book";
   const navigate = useNavigate();
   const rootState = useSelector((state) => state.root);
   const [modal, setModal] = useState({ show: false, title: "" });

@@ -47,7 +47,12 @@ export default function Navbar() {
           <div className="flex justify-between items-center">
             <div className="text-2xl font-bold">StoryBooks</div>
             <div className="flex items-center space-x-3">
-              <RenderIf condition={rootState?.user?.role === "AUTHENTICATED"}>
+              <RenderIf
+                condition={
+                  rootState?.user?.role === "AUTHENTICATED" ||
+                  rootState?.user == null
+                }
+              >
                 <Link to="/" className="text-xl font-medium">
                   <div
                     className={`px-9 rounded-full py-3 ${
@@ -134,7 +139,7 @@ export default function Navbar() {
                                 <UserIcon
                                   width={25}
                                   height={25}
-                                  color={active && "#0ea5e9"}
+                                  color={active ? "#0ea5e9" : "#000"}
                                 />
                                 <p
                                   className={`${

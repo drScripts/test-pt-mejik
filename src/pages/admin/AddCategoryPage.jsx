@@ -7,6 +7,7 @@ import { Base, Navbar } from "../../containers";
 import { ADDCATEGORY } from "../../graphql/mutations";
 
 export default function AddCategoryPage() {
+  document.title = "Story Book Admin | Add Category";
   const navigation = useNavigate();
 
   const [form, setForm] = useState({

@@ -20,6 +20,7 @@ const tableTitles = [
 ];
 
 export default function BorrowsPage() {
+  document.title = "Story Book Admin | Borrows";
   const [currentPage, setcurrentPage] = useState(1);
   const generateReadableDate = (dateString) => {
     return moment(new Date(dateString)).format("DD, MMM YYYY H:m");

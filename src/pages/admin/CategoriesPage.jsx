@@ -10,6 +10,7 @@ import { DELETECATEGORY } from "../../graphql/mutations";
 import { toast } from "react-toastify";
 
 export default function CategoriesPage() {
+  document.title = "Story Book Admin | Categories";
   const limitData = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const { data, loading, refetch } = useQuery(GETCATEGORIES, {

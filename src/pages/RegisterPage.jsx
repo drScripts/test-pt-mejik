@@ -16,6 +16,7 @@ import { REGISTERQUERY } from "../graphql/mutations";
 import { setAppLoading, userSuccessLogin } from "../reducers/root";
 
 export default function RegisterPage() {
+  document.title = "Story Book | Register";
   const [formState, setFormState] = useState({
     firstName: "",
     lastName: "",

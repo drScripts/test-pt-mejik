@@ -8,6 +8,7 @@ import { UPDATERACK } from "../../graphql/mutations";
 import { GETRACK } from "../../graphql/queries";
 
 export default function EditRackPage() {
+  document.title = "Story Book Admin | Detail Rack";
   const navigation = useNavigate();
   const { id } = useParams();
 

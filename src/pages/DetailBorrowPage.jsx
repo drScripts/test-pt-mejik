@@ -7,6 +7,7 @@ import { GETBORROW } from "../graphql/queries";
 import moment from "moment";
 
 export default function DetailBorrowPage() {
+  document.title = "Story Book | Detail Borrow";
   const { id } = useParams();
   const { data, loading } = useQuery(GETBORROW, {
     variables: {

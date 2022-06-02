@@ -10,6 +10,7 @@ import { DELETERACK } from "../../graphql/mutations";
 import { toast } from "react-toastify";
 
 export default function RacksPage() {
+  document.title = "Story Book Admin | Racks";
   const limitData = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const { data, loading, refetch } = useQuery(GETRACKS, {

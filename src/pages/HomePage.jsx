@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 function HomePage() {
+  document.title = "Story Book | Home";
   const [mainSearch, setMainSearch] = useState("");
   const [, setSearchParams] = useSearchParams();
   const mainListBook = useRef();

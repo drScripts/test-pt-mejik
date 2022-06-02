@@ -10,6 +10,7 @@ import { DELETEBOOKMUTATE } from "../../graphql/mutations";
 import { toast } from "react-toastify";
 
 export default function BooksPage() {
+  document.title = "Story Book Admin | Books";
   const limitData = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
