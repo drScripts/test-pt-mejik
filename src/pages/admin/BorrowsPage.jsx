@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { PencilAltIcon } from "@heroicons/react/solid";
 import moment from "moment";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { CustomTable } from "../../components";
 import { Base, Navbar } from "../../containers";
@@ -26,7 +26,7 @@ export default function BorrowsPage() {
     return moment(new Date(dateString)).format("DD, MMM YYYY H:m");
   };
 
-  const { data, loading } = useQuery(GETBORROWS, {
+  const { data, loading, refetch } = useQuery(GETBORROWS, {
     variables: {
       orderBy: "createdAt_DESC",
       limit: 10000, // remove default limiting data (20 default) because i want to make a pagination if i use limit and skip i can't find the full length of data
@@ -43,6 +43,10 @@ export default function BorrowsPage() {
   const onPaginationClick = (page) => {
     setcurrentPage(page);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   return (
     <Base isLoading={loading}>

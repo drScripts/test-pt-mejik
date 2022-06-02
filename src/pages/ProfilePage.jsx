@@ -11,9 +11,7 @@ export default function ProfilePage() {
   const rootState = useSelector((state) => state.root);
 
   const getHistoryUser = useCallback(() => {
-    fetch(
-      `https://dev-libraryzyhwf.microgen.id/api/history/${rootState?.user?.id}`
-    )
+    fetch(`${process.env.REACT_APP_CUSTOM_API_URL}/${rootState?.user?.id}`)
       .then((res) => res.json())
       .then((value) => {
         setUserHistory(value);

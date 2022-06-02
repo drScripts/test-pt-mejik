@@ -42,12 +42,12 @@ export default function ListBooks({ refs }) {
     if (searchParams.get("category") === name) {
       setSearchParams({
         category: "",
-        q: searchParams.get("q"),
+        q: searchParams.get("q") ?? "",
       });
     } else {
       setSearchParams({
         category: name,
-        q: searchParams.get("q"),
+        q: searchParams.get("q") ?? "",
       });
     }
   };

@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { CustomTable } from "../../components";
 import { Base, Navbar } from "../../containers";
 import { GETRACKS } from "../../graphql/queries";
@@ -39,6 +39,10 @@ export default function RacksPage() {
   const paginationCllickHandler = (page) => {
     setCurrentPage(page);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   return (
     <Base isLoading={loading || loadingDelete}>

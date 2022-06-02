@@ -19,7 +19,7 @@ import "animate.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const httpLink = createHttpLink({
-  uri: "https://dev-libraryzyhwf.microgen.id/graphql",
+  uri: process.env.REACT_APP_GRAPHQL_URL,
 });
 
 const authLink = setContext((_, { headers }) => {
